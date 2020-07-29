@@ -1,0 +1,5 @@
+# Build
+docs/_build
+docs/tutorial
+docs/node_modules
+docs/modules
