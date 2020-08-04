@@ -24,11 +24,11 @@ import (
 	"github.com/cosmos/cosmos-sdk/x/staking"
 	"github.com/cosmos/cosmos-sdk/x/supply"
 
-	// "github.com/cosmos/ethermint/app/ante"
-	// ethermintcodec "github.com/cosmos/ethermint/codec"
-	// eminttypes "github.com/cosmos/ethermint/types"
-	// "github.com/cosmos/ethermint/x/evm"
-	// "github.com/cosmos/ethermint/x/faucet"
+	"github.com/cosmos/ethermint/app/ante"
+	ethermintcodec "github.com/cosmos/ethermint/codec"
+	ethermint "github.com/cosmos/ethermint/types"
+	"github.com/cosmos/ethermint/x/evm"
+	"github.com/cosmos/ethermint/x/faucet"
 
 	abci "github.com/tendermint/tendermint/abci/types"
 	"github.com/tendermint/tendermint/libs/log"
@@ -42,7 +42,7 @@ var (
 	// DefaultCLIHome sets the default home directories for the application CLI
 	DefaultCLIHome = os.ExpandEnv("$HOME/.aragoncli")
 
-	// DefaultNodeHome sets the folder where the applcation data and configuration will be stored
+	// DefaultNodeHome sets the folder where the application data and configuration will be stored
 	DefaultNodeHome = os.ExpandEnv("$HOME/.aragond")
 
 	// ModuleBasics defines the module BasicManager is in charge of setting up basic,
@@ -63,8 +63,8 @@ var (
 		crisis.AppModuleBasic{},
 		slashing.AppModuleBasic{},
 		evidence.AppModuleBasic{},
-		// evm.AppModuleBasic{},
-		// faucet.AppModuleBasic{},
+		evm.AppModuleBasic{},
+		faucet.AppModuleBasic{},
 	)
 
 	// module account permissions
@@ -75,7 +75,7 @@ var (
 		staking.BondedPoolName:    {supply.Burner, supply.Staking},
 		staking.NotBondedPoolName: {supply.Burner, supply.Staking},
 		gov.ModuleName:            {supply.Burner},
-		// faucet.ModuleName:         {supply.Minter},
+		faucet.ModuleName:         {supply.Minter},
 	}
 
 	// module accounts that are allowed to receive tokens
@@ -114,8 +114,8 @@ type App struct {
 	CrisisKeeper   crisis.Keeper
 	ParamsKeeper   params.Keeper
 	EvidenceKeeper evidence.Keeper
-	// EvmKeeper      evm.Keeper
-	// FaucetKeeper   faucet.Keeper
+	EvmKeeper      evm.Keeper
+	FaucetKeeper   faucet.Keeper
 
 	// the module manager
 	mm *module.Manager
@@ -141,8 +141,8 @@ func NewApp(
 	keys := sdk.NewKVStoreKeys(
 		bam.MainStoreKey, auth.StoreKey, staking.StoreKey,
 		supply.StoreKey, mint.StoreKey, distr.StoreKey, slashing.StoreKey,
-		gov.StoreKey, params.StoreKey, evidence.StoreKey, 
-		// evm.StoreKey, faucet.StoreKey,
+		gov.StoreKey, params.StoreKey, evidence.StoreKey,
+		evm.StoreKey, faucet.StoreKey,
 	)
 
 	tkeys := sdk.NewTransientStoreKeys(params.TStoreKey)
@@ -170,7 +170,7 @@ func NewApp(
 
 	// use custom Aragon Chain account for contracts
 	app.AccountKeeper = auth.NewAccountKeeper(
-		cdc, keys[auth.StoreKey], app.subspaces[auth.ModuleName], eminttypes.ProtoAccount,
+		cdc, keys[auth.StoreKey], app.subspaces[auth.ModuleName], ethermint.ProtoAccount,
 	)
 	app.BankKeeper = bank.NewBaseKeeper(
 		app.AccountKeeper, app.subspaces[bank.ModuleName], app.BlacklistedAccAddrs(),
@@ -195,12 +195,12 @@ func NewApp(
 	app.CrisisKeeper = crisis.NewKeeper(
 		app.subspaces[crisis.ModuleName], invCheckPeriod, app.SupplyKeeper, auth.FeeCollectorName,
 	)
-	// app.EvmKeeper = evm.NewKeeper(
-	// 	app.cdc, keys[evm.StoreKey], app.AccountKeeper, app.BankKeeper,
-	// )
-	// app.FaucetKeeper = faucet.NewKeeper(
-	// 	app.cdc, keys[faucet.StoreKey], app.SupplyKeeper,
-	// )
+	app.EvmKeeper = evm.NewKeeper(
+		app.cdc, keys[evm.StoreKey], app.AccountKeeper, app.BankKeeper,
+	)
+	app.FaucetKeeper = faucet.NewKeeper(
+		app.cdc, keys[faucet.StoreKey], app.SupplyKeeper,
+	)
 
 	// create evidence keeper with router
 	evidenceKeeper := evidence.NewKeeper(
@@ -241,8 +241,8 @@ func NewApp(
 		distr.NewAppModule(app.DistrKeeper, app.AccountKeeper, app.SupplyKeeper, app.StakingKeeper),
 		staking.NewAppModule(app.StakingKeeper, app.AccountKeeper, app.SupplyKeeper),
 		evidence.NewAppModule(app.EvidenceKeeper),
-		// evm.NewAppModule(app.EvmKeeper, app.AccountKeeper),
-		// faucet.NewAppModule(app.FaucetKeeper),
+		evm.NewAppModule(app.EvmKeeper, app.AccountKeeper),
+		faucet.NewAppModule(app.FaucetKeeper),
 	)
 
 	// During begin block slashing happens after distr.BeginBlocker so that
@@ -261,8 +261,8 @@ func NewApp(
 	app.mm.SetOrderInitGenesis(
 		auth.ModuleName, distr.ModuleName, staking.ModuleName, bank.ModuleName,
 		slashing.ModuleName, gov.ModuleName, mint.ModuleName, supply.ModuleName,
-		crisis.ModuleName, genutil.ModuleName, evidence.ModuleName, 
-		// evm.ModuleName, faucet.ModuleName,
+		crisis.ModuleName, genutil.ModuleName, evidence.ModuleName,
+		evm.ModuleName, faucet.ModuleName,
 	)
 
 	app.mm.RegisterInvariants(&app.CrisisKeeper)

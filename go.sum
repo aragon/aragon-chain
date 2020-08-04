@@ -31,6 +31,7 @@ github.com/BurntSushi/toml v0.3.1 h1:WXkYYl6Yr3qBf1K79EBnL4mak0OimBfB0XUf9Vl28OQ
 github.com/BurntSushi/toml v0.3.1/go.mod h1:xHWCNGjB5oqiDr8zfno3MHue2Ht5sIBksp03qcyfWMU=
 github.com/BurntSushi/xgb v0.0.0-20160522181843-27f122750802/go.mod h1:IVnqGOEym/WlBOVXweHU+Q+/VP0lqqI8lqeDx9IjBqo=
 github.com/ChainSafe/ethermint v0.0.0-20200804185232-241fb2fe839c/go.mod h1:pMlNA0twoRHJqO/nKu0m0VR0GzUn1zFNlEKl3MPHdWM=
+github.com/ChainSafe/ethermint v0.0.0-20200804194836-af0d07ff97fe h1:NqTrZSuDc/v0TWyIHnFaVI6p8oJsDGsesa2zA+wri64=
 github.com/ChainSafe/ethermint v0.0.0-20200804194836-af0d07ff97fe/go.mod h1:rJcNi/tBTP4ybsq+YXp5ldtyikr9fJ59YN2bfRBJI28=
 github.com/ChainSafe/go-schnorrkel v0.0.0-20200102211924-4bcbc698314f/go.mod h1:URdX5+vg25ts3aCh8H5IFZybJYKWhJHYMTnf+ULtoC4=
 github.com/ChainSafe/go-schnorrkel v0.0.0-20200405005733-88cbf1b4c40d h1:nalkkPQcITbvhmL4+C4cKA87NW0tfm3Kl9VXRoPywFg=
@@ -571,6 +572,7 @@ github.com/spf13/viper v1.6.2/go.mod h1:t3iDnF5Jlj76alVNuyFBk5oUMCvsrkbvZK0WQdfD
 github.com/spf13/viper v1.6.3/go.mod h1:jUMtyi0/lB5yZH/FjyGAoH7IMNrIhlBf6pXZmbMDvzw=
 github.com/spf13/viper v1.7.0 h1:xVKxvI7ouOI5I+U9s2eeiUfMaWBVoXA3AWskkrqK0VM=
 github.com/spf13/viper v1.7.0/go.mod h1:8WkrPz2fc9jxqZNCJI/76HCieCp4Q8HaLFoCha5qpdg=
+github.com/spf13/viper v1.7.1 h1:pM5oEahlgWv/WnHXpgbKz7iLIxRf65tye2Ci+XFK5sk=
 github.com/spf13/viper v1.7.1/go.mod h1:8WkrPz2fc9jxqZNCJI/76HCieCp4Q8HaLFoCha5qpdg=
 github.com/status-im/keycard-go v0.0.0-20190316090335-8537d3370df4/go.mod h1:RZLeN1LMWmRsyYjvAu+I6Dm9QmlDaIIt+Y+4Kd7Tp+Q=
 github.com/status-im/keycard-go v0.0.0-20190424133014-d95853db0f48 h1:ju5UTwk5Odtm4trrY+4Ca4RMj5OyXbmVeDAVad2T0Jw=

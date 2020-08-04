@@ -2,11 +2,8 @@ package main
 
 import (
 	"fmt"
-	"os"
-	"path"
 
 	"github.com/spf13/cobra"
-	"github.com/spf13/viper"
 
 	tmamino "github.com/tendermint/tendermint/crypto/encoding/amino"
 	"github.com/tendermint/tendermint/libs/cli"
@@ -24,6 +21,7 @@ import (
 	"github.com/cosmos/cosmos-sdk/x/bank"
 	bankcmd "github.com/cosmos/cosmos-sdk/x/bank/client/cli"
 
+	ethermintclient "github.com/cosmos/ethermint/client"
 	ethermintcrypto "github.com/cosmos/ethermint/crypto"
 	"github.com/cosmos/ethermint/rpc"
 
@@ -60,7 +58,7 @@ func main() {
 	// Add --chain-id to persistent flags and mark it required
 	rootCmd.PersistentFlags().String(flags.FlagChainID, "", "Chain ID of tendermint node")
 	rootCmd.PersistentPreRunE = func(_ *cobra.Command, _ []string) error {
-		return initConfig(rootCmd)
+		return ethermintclient.InitConfig(rootCmd)
 	}
 
 	// Construct Root Command
@@ -71,7 +69,7 @@ func main() {
 		txCmd(cdc),
 		rpc.EmintServeCmd(cdc),
 		flags.LineBreak,
-		keyCommands(),
+		ethermintclient.KeyCommands(),
 		flags.LineBreak,
 		version.Cmd,
 		flags.NewCompletionCmd(rootCmd, true),
@@ -140,27 +138,4 @@ func txCmd(cdc *sdkcodec.Codec) *cobra.Command {
 	txCmd.RemoveCommand(cmdsToRemove...)
 
 	return txCmd
-}
-
-func initConfig(cmd *cobra.Command) error {
-	home, err := cmd.PersistentFlags().GetString(cli.HomeFlag)
-	if err != nil {
-		return err
-	}
-
-	cfgFile := path.Join(home, "config", "config.toml")
-	if _, err := os.Stat(cfgFile); err == nil {
-		viper.SetConfigFile(cfgFile)
-
-		if err := viper.ReadInConfig(); err != nil {
-			return err
-		}
-	}
-	if err := viper.BindPFlag(flags.FlagChainID, cmd.PersistentFlags().Lookup(flags.FlagChainID)); err != nil {
-		return err
-	}
-	if err := viper.BindPFlag(cli.EncodingFlag, cmd.PersistentFlags().Lookup(cli.EncodingFlag)); err != nil {
-		return err
-	}
-	return viper.BindPFlag(cli.OutputFlag, cmd.PersistentFlags().Lookup(cli.OutputFlag))
 }
