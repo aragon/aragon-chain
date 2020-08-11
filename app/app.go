@@ -34,16 +34,24 @@ import (
 	"github.com/tendermint/tendermint/libs/log"
 	tmos "github.com/tendermint/tendermint/libs/os"
 	dbm "github.com/tendermint/tm-db"
+
+	aragon "github.com/aragon/aragon-chain/types"
 )
+
+func init() {
+	// set the address prefixes
+	config := sdk.GetConfig()
+	aragon.SetBech32Prefixes(config)
+}
 
 const appName = "AragonChain"
 
 var (
 	// DefaultCLIHome sets the default home directories for the application CLI
-	DefaultCLIHome = os.ExpandEnv("$HOME/.aragoncli")
+	DefaultCLIHome = os.ExpandEnv("$HOME/.aragonchaincli")
 
 	// DefaultNodeHome sets the folder where the application data and configuration will be stored
-	DefaultNodeHome = os.ExpandEnv("$HOME/.aragond")
+	DefaultNodeHome = os.ExpandEnv("$HOME/.aragonchaind")
 
 	// ModuleBasics defines the module BasicManager is in charge of setting up basic,
 	// non-dependant module elements, such as codec registration

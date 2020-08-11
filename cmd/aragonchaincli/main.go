@@ -27,6 +27,7 @@ import (
 
 	"github.com/aragon/aragon-chain/app"
 	"github.com/aragon/aragon-chain/codec"
+	aragon "github.com/aragon/aragon-chain/types"
 )
 
 var (
@@ -45,14 +46,12 @@ func main() {
 
 	// Read in the configuration file for the sdk
 	config := sdk.GetConfig()
-	config.SetBech32PrefixForAccount(sdk.Bech32PrefixAccAddr, sdk.Bech32PrefixAccPub)
-	config.SetBech32PrefixForValidator(sdk.Bech32PrefixValAddr, sdk.Bech32PrefixValPub)
-	config.SetBech32PrefixForConsensusNode(sdk.Bech32PrefixConsAddr, sdk.Bech32PrefixConsPub)
+	aragon.SetBech32Prefixes(config)
 	config.Seal()
 
 	rootCmd := &cobra.Command{
-		Use:   "aragoncli",
-		Short: "Command line interface for interacting with aragond",
+		Use:   "aragonchaincli",
+		Short: "Command line interface for interacting with aragonchaind",
 	}
 
 	// Add --chain-id to persistent flags and mark it required
