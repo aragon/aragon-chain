@@ -91,7 +91,7 @@ module.exports = {
       chat: {
         title: 'Developer Chat',
         text: 'Chat with Aragon-Chain developers on Discord.',
-        url: 'https://discordapp.com/channels/669268347736686612',
+        url: 'https://discord.gg/Vjw2RQ7',
         bg: 'linear-gradient(103.75deg, #1B1E36 0%, #22253F 100%)'
       },
       forum: {
@@ -104,7 +104,7 @@ module.exports = {
       github: {
         title: 'Found an Issue?',
         text: 'Help us improve this page by suggesting edits on GitHub.',
-        url: 'https://github.com/aragon/aragon-chain/edit/development/docs/README.md',
+        url: 'https://github.com/aragon/aragon-chain/issues',
         bg: '#F8F9FC'
       }
     },
@@ -121,15 +121,11 @@ module.exports = {
         },
         {
           service: 'twitter',
-          url: 'https://twitter.com/chainsafeth'
+          url: 'https://twitter.com/AragonProject'
         },
         {
           service: 'linkedin',
-          url: 'https://www.linkedin.com/company/chainsafe-systems'
-        },
-        {
-          service: 'medium',
-          url: 'https://medium.com/chainsafe-systems'
+          url: 'https://www.linkedin.com/company/aragonproject/'
         },
       ],
       smallprint:
@@ -143,7 +139,7 @@ module.exports = {
               url: 'https://docs.cosmos.network'
             },
             {
-              title: 'Aragon-Chain Docs',
+              title: 'Ethereum Docs',
               url: 'https://ethereum.org/developers'
             },
             {
@@ -160,12 +156,12 @@ module.exports = {
               url: 'https://discord.gg/W8trcGV'
             },
             {
-              title: 'Aragon-Chain Forum',
+              title: 'Aragon-Chain Forum [coming soon]',
               url: 'https://forum.cosmos.network/c/aragon-chain'
             },
             {
-              title: 'Chainsafe Blog',
-              url: 'https://medium.com/chainsafe-systems'
+              title: 'Aragon-Chain Discord',
+              url: 'https://discord.gg/Vjw2RQ7'
             }
           ]
         },
@@ -175,10 +171,6 @@ module.exports = {
             {
               title: 'Contributing to the docs',
               url: 'https://github.com/aragon/aragon-chain/tree/development/docs'
-            },
-            {
-              title: 'Careers at Chainsafe',
-              url: 'https://chainsafe.io/#careers'
             },
             {
               title: 'Source code on GitHub',
