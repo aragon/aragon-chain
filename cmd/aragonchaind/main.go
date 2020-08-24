@@ -95,8 +95,14 @@ func main() {
 }
 
 func newApp(logger log.Logger, db dbm.DB, traceStore io.Writer) abci.Application {
-	return app.NewApp(logger, db, traceStore, true, 0,
-		baseapp.SetPruning(storetypes.NewPruningOptionsFromString(viper.GetString("pruning"))))
+	return app.NewApp(
+		logger,
+		db,
+		traceStore,
+		true,
+		0,
+		baseapp.SetPruning(storetypes.NewPruningOptionsFromString(viper.GetString("pruning"))),
+	)
 }
 
 func exportAppStateAndTMValidators(
@@ -104,15 +110,15 @@ func exportAppStateAndTMValidators(
 ) (json.RawMessage, []tmtypes.GenesisValidator, error) {
 
 	if height != -1 {
-		emintApp := app.NewApp(logger, db, traceStore, true, 0)
-		err := emintApp.LoadHeight(height)
+		aragonChain := app.NewApp(logger, db, traceStore, true, 0)
+		err := aragonChain.LoadHeight(height)
 		if err != nil {
 			return nil, nil, err
 		}
-		return emintApp.ExportAppStateAndValidators(forZeroHeight, jailWhiteList)
+		return aragonChain.ExportAppStateAndValidators(forZeroHeight, jailWhiteList)
 	}
 
-	emintApp := app.NewApp(logger, db, traceStore, true, 0)
+	aragonChain := app.NewApp(logger, db, traceStore, true, 0)
 
-	return emintApp.ExportAppStateAndValidators(forZeroHeight, jailWhiteList)
+	return aragonChain.ExportAppStateAndValidators(forZeroHeight, jailWhiteList)
 }

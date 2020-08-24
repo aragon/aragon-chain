@@ -2,26 +2,26 @@
 
 Thank you for considering making contributions to Aragon Chain! Start by taking a look at this [coding repo](https://github.com/tendermint/coding) for overall information on repository workflow and standards.
 
-Please follow standard github best practices: fork the repo, branch from the tip of develop, make some commits, and submit a pull request to develop. See the [open issues](https://github.com/cosmos/ethermint/issues) for things we need help with!
+Please follow standard github best practices: fork the repo, branch from the tip of develop, make some commits, and submit a pull request to develop. See the [open issues](https://github.com/aragon/aragon-chain/issues) for things we need help with!
 
 Please make sure to use `gofmt` before every commit - the easiest way to do this is have your editor run it for you upon saving a file. Additionally please ensure that your code is lint compliant by running `make lint`
 
-Looking for a good place to start contributing? How about checking out some [good first issues](https://github.com/cosmos/ethermint/issues?q=is%3Aopen+is%3Aissue+label%3A%22good+first+issue%22)
+Looking for a good place to start contributing? How about checking out some [good first issues](https://github.com/aragon/aragon-chain/issues?q=is%3Aopen+is%3Aissue+label%3A%22good+first+issue%22)
 
 ## Forking
 
 Please note that Go requires code to live under absolute paths, which complicates forking.
-While your fork should live at `https://github.com/<username>/ethermint`,
-the code should not exist at  `$GOPATH/src/github.com/<username>/ethermint`.
+While your fork should live at `https://github.com/<username>/aragon-chain`,
+the code should not exist at  `$GOPATH/src/github.com/<username>/aragon-chain`.
 Instead, you should use `git remote` to add the fork as a new remote for the original repo,
-`$GOPATH/src/github.com/cosmos/ethermint `, and do all the work there.
+`$GOPATH/src/github.com/aragon/aragon-chain `, and do all the work there.
 
 For instance, to create a fork and work on a branch of it, One would:
 
   * Create the fork on github, using the fork button.
-  * Go to the original repo checked out locally (i.e. `$GOPATH/src/github.com/cosmos/ethermint`)
+  * Go to the original repo checked out locally (i.e. `$GOPATH/src/github.com/aragon/aragon-chain`)
   * `git remote rename origin upstream`
-  * `git remote add origin git@github.com:<username>/ethermint.git`
+  * `git remote add origin git@github.com:<username>/aragon-chain.git`
 
 Now `origin` refers to my fork and `upstream` refers to the Aragon Chain version.
 So I can `git push -u origin <branch>` to update my fork, and make pull requests to Aragon Chain from there.
@@ -71,21 +71,24 @@ Libraries need not follow the model strictly, but would be wise to.
 Aragon Chain utilizes [semantic versioning](https://semver.org/).
 
 ### Development Procedure:
+
 - the latest state of development is on `develop`
 - `develop` must never fail `make test`
 - `develop` should not fail `make lint`
 - no --force onto `develop` (except when reverting a broken commit, which should seldom happen)
-- create a development branch either on github.com/cosmos/ethermint, or your fork (using `git remote add origin`)
+- create a development branch either on github.com/aragon/aragon-chain, or your fork (using `git remote add origin`)
 - [squash your commits](https://github.com/todotxt/todo.txt-android/wiki/Squash-All-Commits-Related-to-a-Single-Issue-into-a-Single-Commit) into an individual commit
 - before submitting a pull request, begin `git rebase` on top of `develop`
 
 ### Pull Merge Procedure:
+
 - ensure pull branch is rebased on develop
 - [squash your commits](https://github.com/todotxt/todo.txt-android/wiki/Squash-All-Commits-Related-to-a-Single-Issue-into-a-Single-Commit) into an individual commit
 - run `make test` and `make test-cli` to ensure that all tests pass
 - merge pull request
 
 ### Release Procedure:
+
 - start on `develop`
 - prepare changelog/release issue
 - bump versions
@@ -94,6 +97,7 @@ Aragon Chain utilizes [semantic versioning](https://semver.org/).
 - merge master back to develop
 
 ### Hotfix Procedure:
+
 - start on `master`
 - checkout a new branch named hotfix-vX.X.X
 - make the required changes
