@@ -17,8 +17,8 @@ make install
 Check that the binaries have been successfuly installed:
 
 ```bash
-aragond -h
-aragoncli -h
+aragonchaind -h
+aragonchaincli -h
 ```
 
 <!-- ## Docker -->

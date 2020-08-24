@@ -19,17 +19,17 @@ Learn how to deploy a local testnet or connect to an existing one {synopsis}
 If you want to start a network from scratch, you will need to start the genesis procedure.
 :::
 
-If you want to connect to an existing testnet, fetch the testnet's `genesis.json` file and copy it into the `aragond`'s config directory (i.e `$HOME/.aragond/config/genesis.json`).
+If you want to connect to an existing testnet, fetch the testnet's `genesis.json` file and copy it into the `aragonchaind`'s config directory (i.e `$HOME/.aragonchaind/config/genesis.json`).
 
 Then verify the correctness of the genesis configuration file:
 
 ```bash
-aragond validate-genesis
+aragonchaind validate-genesis
 ```
 
 ### Add Seed Nodes
 
-Your node needs to know how to find peers. You'll need to add healthy seed nodes to `$HOME/.aragond/config/config.toml`. If those seeds aren't working, you can find more seeds and persistent peers on an existing explorer.
+Your node needs to know how to find peers. You'll need to add healthy seed nodes to `$HOME/.aragonchaind/config/config.toml`. If those seeds aren't working, you can find more seeds and persistent peers on an existing explorer.
 
 For more information on seeds and peers, you can the Tendermint [P2P documentation](https://docs.tendermint.com/master/spec/p2p/peer.html).
 
@@ -43,23 +43,23 @@ Once the aragon-chain daemon is up and running, you can request tokens to your a
 
 ```bash
 # query your initial balance
-aragoncli q bank balances $(aragoncli keys show <mykey> -a)  
+aragonchaincli q bank balances $(aragonchaincli keys show <mykey> -a)  
 
 # send a tx to request tokens to your account address
-aragoncli tx faucet request 100photon --from <mykey>
+aragonchaincli tx faucet request 100photon --from <mykey>
 
 # query your balance after the request
-aragoncli q bank balances $(aragoncli keys show <mykey> -a)
+aragonchaincli q bank balances $(aragonchaincli keys show <mykey> -a)
 ```
 
 You can also check to total amount funded by the faucet and the total supply of the chain via:
 
 ```bash
 # total amount funded by the faucet
-aragoncli q faucet funded
+aragonchaincli q faucet funded
 
 # total supply
-aragoncli q supply total
+aragonchaincli q supply total
 ```
 
 ## Next {hide}
