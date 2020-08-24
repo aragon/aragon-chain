@@ -60,7 +60,7 @@ contain valid denominations. Accounts may optionally be supplied with vesting pa
 					viper.GetString(flags.FlagKeyringBackend),
 					viper.GetString(flagClientHome),
 					inBuf,
-					keys.WithKeygenFunc(crypto.EthermintKeygenFunc),
+					crypto.EthSecp256k1Options()...,
 				)
 				if err != nil {
 					return err
