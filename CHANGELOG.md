@@ -36,3 +36,7 @@ Ref: https://keepachangelog.com/en/1.0.0/
 # Changelog
 
 ## [Unreleased]
+
+### Improvements
+
+* (ethermint) [\#2](https://github.com/aragon/aragon-chain/pull/2) Bump Ethermint version to [v0.1.0](https://github.com/ChainSafe/ethermint/releases/tag/v0.1.0)

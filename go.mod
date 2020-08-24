@@ -4,7 +4,7 @@ go 1.14
 
 require (
 	github.com/cosmos/cosmos-sdk v0.39.1
-	github.com/cosmos/ethermint v0.0.0-20190802135314-3f32f9ba8a1f
+	github.com/cosmos/ethermint v0.1.0
 	github.com/ethereum/go-ethereum v1.9.18
 	github.com/spf13/cobra v1.0.0
 	github.com/spf13/viper v1.7.1
@@ -14,4 +14,4 @@ require (
 )
 
 // use ChainSafe fork
-replace github.com/cosmos/ethermint => github.com/ChainSafe/ethermint v0.0.0-20200812220222-d732e74bd4c1
+replace github.com/cosmos/ethermint => github.com/ChainSafe/ethermint v0.1.0
