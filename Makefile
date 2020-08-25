@@ -258,7 +258,7 @@ docs-build:
 	npm run build
 
 godocs:
-	@echo "--> Wait a few seconds and visit http://localhost:6060/pkg/github.com/cosmos/ethermint"
+	@echo "--> Wait a few seconds and visit http://localhost:6060/pkg/github.com/aragon/aragon-chain"
 	godoc -http=:6060
 
 .PHONY: docs-serve docs-build

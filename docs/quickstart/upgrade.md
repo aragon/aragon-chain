@@ -13,7 +13,7 @@ These instructions are for full nodes that have ran on previous versions of and 
 First, stop your instance of `aragonchaind`. Next, upgrade the software:
 
 ```bash
-cd ethermint
+cd aragon-chain
 git fetch --all && git checkout <new_version>
 make install
 ```

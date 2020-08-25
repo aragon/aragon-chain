@@ -10,7 +10,7 @@ Clone and build Aragon Chain using `git`:
 
 ```bash
 git clone https://github.com/aragon/aragon-chain.git
-cd ethermint
+cd aragon-chain
 make install
 ```
 
