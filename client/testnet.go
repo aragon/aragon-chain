@@ -205,7 +205,6 @@ func InitTestnet(
 			return err
 		}
 
-		accTokens := sdk.TokensFromConsensusPower(1000)
 		accStakingTokens := sdk.TokensFromConsensusPower(5000)
 		coins := sdk.NewCoins(
 			sdk.NewCoin(sdk.DefaultBondDenom, accTokens),
