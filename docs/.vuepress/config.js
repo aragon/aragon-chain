@@ -1,10 +1,8 @@
 module.exports = {
   theme: 'cosmos',
-  title: 'Aragon-Chain Documentation',
+  title: 'Aragon Chain Documentation',
   locales: {
-    '/': {
-      lang: 'en-US'
-    },
+    '/': {lang: 'en-US'},
   },
   base: process.env.VUEPRESS_BASE || '/',
   themeConfig: {
@@ -18,69 +16,26 @@ module.exports = {
     logo: {
       src: '/logo.svg',
     },
-    algolia: {
-      id: 'BH4D9OD16A',
-      key: 'ac317234e6a42074175369b2f42e9754',
-      index: 'aragon-chain'
-    },
+    algolia: {id: 'BH4D9OD16A', key: 'ac317234e6a42074175369b2f42e9754', index: 'aragon-chain'},
     sidebar: {
       auto: false,
       nav: [
         {
           title: 'Reference',
           children: [
-            {
-              title: 'Introduction',
-              directory: true,
-              path: '/intro'
-            },
-            {
-              title: 'Quick Start',
-              directory: true,
-              path: '/quickstart'
-            },
-            {
-              title: 'Basics',
-              directory: true,
-              path: '/basics'
-            },
-            {
-              title: 'Core Concepts',
-              directory: true,
-              path: '/core'
-            },
-            {
-              title: 'Guides',
-              directory: true,
-              path: '/guides'
-            }
+            {title: 'Introduction', directory: true, path: '/intro'},
+            {title: 'Quick Start', directory: true, path: '/quickstart'},
+            {title: 'Basics', directory: true, path: '/basics'},
+            {title: 'Core Concepts', directory: true, path: '/core'},
+            {title: 'Guides', directory: true, path: '/guides'}
           ]
         },
-        {
-          title: 'Specifications',
-          children: [
-            {
-              title: 'Modules',
-              directory: true,
-              path: '/modules'
-            }
-          ]
-        },
-        {
+        {title: 'Specifications', children: [{title: 'Modules', directory: true, path: '/modules'}]}, {
           title: 'Resources',
           children: [
-            {
-              title: 'Aragon-Chain API Reference',
-              path: 'https://godoc.org/github.com/aragon/aragon-chain'
-            },
-            {
-              title: 'Cosmos REST API Spec',
-              path: 'https://cosmos.network/rpc/'
-            },
-            {
-              title: 'Ethereum JSON RPC API Reference',
-              path: 'https://eth.wiki/json-rpc/API'
-            }
+            {title: 'Aragon Chain API Reference', path: 'https://godoc.org/github.com/aragon/aragon-chain'},
+            {title: 'Ethermint Docs', path: 'https://docs.ethermint.zone'},
+            {title: 'Ethereum JSON RPC API Reference', path: 'https://eth.wiki/json-rpc/API'}
           ]
         }
       ]
@@ -90,13 +45,13 @@ module.exports = {
       editLink: true,
       chat: {
         title: 'Developer Chat',
-        text: 'Chat with Aragon-Chain developers on Discord.',
+        text: 'Chat with Aragon Chain developers on Discord.',
         url: 'https://discord.gg/Vjw2RQ7',
         bg: 'linear-gradient(103.75deg, #1B1E36 0%, #22253F 100%)'
       },
       forum: {
-        title: 'Aragon-Chain Developer Forum',
-        text: 'Join the Aragon-Chain Developer Forum to learn more.',
+        title: 'Aragon Chain Developer Forum',
+        text: 'Join the Aragon Chain Developer Forum to learn more.',
         url: 'https://forum.cosmos.network/',
         bg: 'linear-gradient(221.79deg, #3D6B99 -1.08%, #336699 95.88%)',
         logo: 'ethereum-white'
@@ -110,23 +65,11 @@ module.exports = {
     },
     footer: {
       logo: '/logo-bw.svg',
-      textLink: {
-        text: 'aragon-chain.zone',
-        url: 'https://aragon-chain.zone'
-      },
+      textLink: {text: 'aragon.org/chain', url: 'https://aragon.org/chain'},
       services: [
-        {
-          service: 'github',
-          url: 'https://github.com/aragon/aragon-chain'
-        },
-        {
-          service: 'twitter',
-          url: 'https://twitter.com/AragonProject'
-        },
-        {
-          service: 'linkedin',
-          url: 'https://www.linkedin.com/company/aragonproject/'
-        },
+        {service: 'github', url: 'https://github.com/aragon/aragon-chain'},
+        {service: 'twitter', url: 'https://twitter.com/AragonProject'},
+        {service: 'linkedin', url: 'https://www.linkedin.com/company/aragonproject/'},
       ],
       smallprint:
           'This website is maintained by [ChainSafe Systems](https://chainsafe.io). The contents and opinions of this website are those of Chainsafe Systems.',
@@ -134,45 +77,24 @@ module.exports = {
         {
           title: 'Documentation',
           children: [
-            {
-              title: 'Cosmos SDK Docs',
-              url: 'https://docs.cosmos.network'
-            },
-            {
-              title: 'Ethereum Docs',
-              url: 'https://ethereum.org/developers'
-            },
-            {
-              title: 'Tendermint Core Docs',
-              url: 'https://docs.tendermint.com'
-            }
+            {title: 'Cosmos SDK Docs', url: 'https://docs.cosmos.network'},
+            {title: 'Ethermint Docs', url: 'https://docs.ethermint.zone'},
+            {title: 'Ethereum Docs', url: 'https://ethereum.org/developers'},
+            {title: 'Tendermint Core Docs', url: 'https://docs.tendermint.com'}
           ]
         },
         {
           title: 'Community',
           children: [
-            {
-              title: 'Cosmos Community',
-              url: 'https://discord.gg/W8trcGV'
-            },
-            {
-              title: 'Aragon-Chain Forum [coming soon]',
-              url: 'https://forum.cosmos.network/c/aragon-chain'
-            },
-            {
-              title: 'Aragon-Chain Discord',
-              url: 'https://discord.gg/Vjw2RQ7'
-            }
+            {title: 'Cosmos Community', url: 'https://discord.gg/W8trcGV'},
+            {title: 'Aragon Chain Forum [coming soon]', url: 'https://forum.cosmos.network/c/aragon-chain'},
+            {title: 'Aragon Chain Discord', url: 'https://discord.gg/Vjw2RQ7'}
           ]
         },
         {
           title: 'Contributing',
           children: [
-            {
-              title: 'Contributing to the docs',
-              url: 'https://github.com/aragon/aragon-chain/tree/development/docs'
-            },
-            {
+            {title: 'Contributing to the docs', url: 'https://github.com/aragon/aragon-chain/tree/main/docs'}, {
               title: 'Source code on GitHub',
               url: 'https://github.com/aragon/aragon-chain/blob/development/docs/DOCS_README.md'
             }

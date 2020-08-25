@@ -48,7 +48,7 @@ Finally, go to the [reset data](./run_node.md#reset-data) section.
 
 ### Export State to a new Genesis locally
 
-Aragon-Chain can dump the entire application state to a JSON file. This, besides upgrades, can be
+Aragon Chain can dump the entire application state to a JSON file. This, besides upgrades, can be
 useful for manual analysis of the state at a given height.
 
 Export state with:
@@ -94,4 +94,4 @@ aragonchaind start
 
 ## Next {hide}
 
-Learn about how to setup a [validator](./validator-setup.md) node on Aragon-Chain {hide}
+Learn about how to setup a [validator](./validator-setup.md) node on Aragon Chain {hide}

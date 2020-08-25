@@ -64,4 +64,4 @@ aragonchaincli q supply total
 
 ## Next {hide}
 
-Learn about how to setup a [validator](./validator-setup.md) node on Aragon-Chain {hide}
+Learn about how to setup a [validator](./validator-setup.md) node on Aragon Chain {hide}

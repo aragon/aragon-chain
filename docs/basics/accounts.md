@@ -4,13 +4,13 @@ order: 1
 
 # Accounts
 
-This document describes the in-built accounts system of Aragon-Chain. {synopsis}
+This document describes the in-built accounts system of Aragon Chain. {synopsis}
 
 ## Cosmos SDK Accounts
 
 <!-- TODO: -->
 
-## Aragon-Chain Accounts
+## Aragon Chain Accounts
 
 <!-- TODO: -->
 
@@ -18,4 +18,4 @@ This document describes the in-built accounts system of Aragon-Chain. {synopsis}
 
 ## Next {hide}
 
-Learn about Aragon-Chain [transactions](./transactions.md) {hide}
+Learn about Aragon Chain [transactions](./transactions.md) {hide}
