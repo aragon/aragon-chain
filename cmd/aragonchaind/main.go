@@ -31,6 +31,7 @@ import (
 	ethermintcrypto "github.com/cosmos/ethermint/crypto"
 
 	"github.com/aragon/aragon-chain/app"
+	"github.com/aragon/aragon-chain/client"
 	"github.com/aragon/aragon-chain/codec"
 	aragon "github.com/aragon/aragon-chain/types"
 )
@@ -75,7 +76,7 @@ func main() {
 			app.DefaultNodeHome, app.DefaultCLIHome,
 		),
 		genutilcli.ValidateGenesisCmd(ctx, cdc, app.ModuleBasics),
-
+		client.TestnetCmd(ctx, cdc, app.ModuleBasics, auth.GenesisAccountIterator{}),
 		// AddGenesisAccountCmd allows users to add accounts to the genesis file
 		AddGenesisAccountCmd(ctx, cdc, app.DefaultNodeHome, app.DefaultCLIHome),
 		flags.NewCompletionCmd(rootCmd, true),
