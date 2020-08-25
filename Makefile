@@ -240,3 +240,25 @@ format:
 	find . -name '*.go' -type f -not -path "./vendor*" -not -path "*.git*" -not -name '*.pb.go' | xargs goimports -w -local github.com/aragon/aragon-chain
 
 .PHONY: lint format
+
+#######################
+###  Documentation  ###
+#######################
+
+# Start docs site at localhost:8080
+docs-serve:
+	@cd docs && \
+	npm install && \
+	npm run serve
+
+# Build the site into docs/.vuepress/dist
+docs-build:
+	@cd docs && \
+	npm install && \
+	npm run build
+
+godocs:
+	@echo "--> Wait a few seconds and visit http://localhost:6060/pkg/github.com/aragon/aragon-chain"
+	godoc -http=:6060
+
+.PHONY: docs-serve docs-build
