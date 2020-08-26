@@ -30,4 +30,4 @@ COPY --from=build-env /go/src/github.com/aragon/aragon-chain/build/aragonchaincl
 EXPOSE 26656 26657 1317 8545 8546
 
 # Run ethermintd by default
-CMD ["/bin/bash"]
+ENTRYPOINT ["/bin/bash"]
