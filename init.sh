@@ -23,25 +23,20 @@ aragonchaincli keys add $KEY --algo=eth_secp256k1
 # Set moniker and chain-id for Aragon (Moniker can be anything, chain-id must be an integer)
 aragonchaind init $MONIKER --chain-id $CHAINID
 
+cat $HOME/.aragonchaind/config/genesis.json | jq '.app_state["staking"]["params"]["bond_denom"]="ara"' > $HOME/.aragonchaind/config/tmp_genesis.json && mv $HOME/.aragonchaind/config/tmp_genesis.json $HOME/.aragonchaind/config/genesis.json
+cat $HOME/.aragonchaind/config/genesis.json | jq '.app_state["crisis"]["constant_fee"]["denom"]="ara"' > $HOME/.aragonchaind/config/tmp_genesis.json && mv $HOME/.aragonchaind/config/tmp_genesis.json $HOME/.aragonchaind/config/genesis.json
+cat $HOME/.aragonchaind/config/genesis.json | jq '.app_state["gov"]["deposit_params"]["min_deposit"][0]["denom"]="ara"' > $HOME/.aragonchaind/config/tmp_genesis.json && mv $HOME/.aragonchaind/config/tmp_genesis.json $HOME/.aragonchaind/config/genesis.json
+cat $HOME/.aragonchaind/config/genesis.json | jq '.app_state["mint"]["params"]["mint_denom"]="ara"' > $HOME/.aragonchaind/config/tmp_genesis.json && mv $HOME/.aragonchaind/config/tmp_genesis.json $HOME/.aragonchaind/config/genesis.json
+cat $HOME/.aragonchaind/config/genesis.json | jq '.app_state["faucet"]["enable_faucet"]=true' >  $HOME/.aragonchaind/config/tmp_genesis.json && mv $HOME/.aragonchaind/config/tmp_genesis.json $HOME/.aragonchaind/config/genesis.json
+
 # Allocate genesis accounts (cosmos formatted addresses)
 aragonchaind add-genesis-account $(aragonchaincli keys show mykey -a) 1000000000000000000ara
 
 # Sign genesis transaction
-aragonchaind gentx --name $KEY --keyring-backend test
+aragonchaind gentx --amount=100000000ara --name $KEY --keyring-backend test
 
 # Collect genesis tx
 aragonchaind collect-gentxs
-
-# Enable faucet
-cat $HOME/.aragonchaind/config/genesis.json | jq '.app_state["staking"]["params"]["bond_denom"]="ara"' > $HOME/.aragonchaind/config/tmp_genesis.json && mv $HOME/.aragonchaind/config/tmp_genesis.json $HOME/.aragonchaind/config/genesis.json
-
-cat $HOME/.aragonchaind/config/genesis.json | jq '.app_state["crisis"]["constant_fee"]["denom"]="ara"' > $HOME/.aragonchaind/config/tmp_genesis.json && mv $HOME/.aragonchaind/config/tmp_genesis.json $HOME/.aragonchaind/config/genesis.json
-
-cat $HOME/.aragonchaind/config/genesis.json | jq '.app_state["gov"]["deposit_params"]["min_deposit"][0]["denom"]="ara"' > $HOME/.aragonchaind/config/tmp_genesis.json && mv $HOME/.aragonchaind/config/tmp_genesis.json $HOME/.aragonchaind/config/genesis.json
-
-cat $HOME/.aragonchaind/config/genesis.json | jq '.app_state["mint"]["params"]["mint_denom"]="ara"' > $HOME/.aragonchaind/config/tmp_genesis.json && mv $HOME/.aragonchaind/config/tmp_genesis.json $HOME/.aragonchaind/config/genesis.json
-
-cat  $HOME/.aragonchaind/config/genesis.json | jq '.app_state["faucet"]["enable_faucet"]=true' >  $HOME/.aragonchaind/config/tmp_genesis.json && mv $HOME/.aragonchaind/config/tmp_genesis.json $HOME/.aragonchaind/config/genesis.json
 
 echo -e '\n\ntestnet faucet enabled'
 echo -e 'to transfer tokens to your account address use:'
