@@ -44,6 +44,7 @@ func init() {
 	// set the address prefixes
 	config := sdk.GetConfig()
 	aragon.SetBech32Prefixes(config)
+	aragon.SetBip44CoinType(config)
 }
 
 const appName = "AragonChain"
@@ -237,7 +238,7 @@ func NewApp(
 		AddRoute(params.RouterKey, params.NewParamChangeProposalHandler(app.ParamsKeeper)).
 		AddRoute(distr.RouterKey, distr.NewCommunityPoolSpendProposalHandler(app.DistrKeeper)).
 		AddRoute(upgrade.RouterKey, upgrade.NewSoftwareUpgradeProposalHandler(app.UpgradeKeeper))
-		
+
 	app.GovKeeper = gov.NewKeeper(
 		cdc, keys[gov.StoreKey], app.subspaces[gov.ModuleName], app.SupplyKeeper,
 		&stakingKeeper, govRouter,
