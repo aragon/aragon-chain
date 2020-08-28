@@ -55,6 +55,7 @@ func main() {
 
 	config := sdk.GetConfig()
 	aragon.SetBech32Prefixes(config)
+	aragon.SetBip44CoinType(config)
 	config.Seal()
 
 	ctx := server.NewDefaultContext()
@@ -101,8 +102,11 @@ func newApp(logger log.Logger, db dbm.DB, traceStore io.Writer) abci.Application
 		db,
 		traceStore,
 		true,
+		map[int64]bool{},
 		0,
 		baseapp.SetPruning(storetypes.NewPruningOptionsFromString(viper.GetString("pruning"))),
+		baseapp.SetMinGasPrices(viper.GetString(server.FlagMinGasPrices)),
+		baseapp.SetHaltHeight(uint64(viper.GetInt(server.FlagHaltHeight))),
 	)
 }
 
@@ -110,16 +114,14 @@ func exportAppStateAndTMValidators(
 	logger log.Logger, db dbm.DB, traceStore io.Writer, height int64, forZeroHeight bool, jailWhiteList []string,
 ) (json.RawMessage, []tmtypes.GenesisValidator, error) {
 
+	aragonChain := app.NewApp(logger, db, traceStore, true, map[int64]bool{}, 0)
+
 	if height != -1 {
-		aragonChain := app.NewApp(logger, db, traceStore, true, 0)
 		err := aragonChain.LoadHeight(height)
 		if err != nil {
 			return nil, nil, err
 		}
-		return aragonChain.ExportAppStateAndValidators(forZeroHeight, jailWhiteList)
 	}
-
-	aragonChain := app.NewApp(logger, db, traceStore, true, 0)
 
 	return aragonChain.ExportAppStateAndValidators(forZeroHeight, jailWhiteList)
 }
