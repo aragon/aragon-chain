@@ -7,7 +7,7 @@ order: 1
 ## What is Aragon Chain
 
 Aragon Chain is a scalable, high-throughput Proof-of-Stake blockchain that is fully compatible and
-interoperable with Ethereum. It s build using the the [Cosmos SDK](https://github.com/cosmos/cosmos-sdk/) which runs on top of [Tendermint Core](https://github.com/tendermint/tendermint) consensus engine.
+interoperable with Ethereum. It is build using the the [Cosmos SDK](https://github.com/cosmos/cosmos-sdk/) which runs on top of [Tendermint Core](https://github.com/tendermint/tendermint) consensus engine.
 
 Aragon Chain allows for running vanilla Ethereum as a [Cosmos](https://cosmos.network/) application-specific blockchain. This allows developers
 to have all the desired features of Ethereum, while at the same time, benefit
@@ -32,7 +32,7 @@ Aragon Chain enables these key features through:
 * Exposing a fully compatible Web3 RPC layer for interacting with existing Ethereum clients and tooling (Metamask, Remix, Truffle, etc).
 
 The sum of these features allows developers to leverage existing Ethereum ecosystem tooling and
-software to seamlessly deploy smart contracts which interact with the rest of the Cosmos ecosystem!
+software to seamlessly deploy smart contracts that interact with the rest of the Cosmos ecosystem!
 
 ## Next {hide}
 
