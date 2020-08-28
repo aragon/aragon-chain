@@ -47,6 +47,7 @@ func main() {
 	// Read in the configuration file for the sdk
 	config := sdk.GetConfig()
 	aragon.SetBech32Prefixes(config)
+	aragon.SetBip44CoinType(config)
 	config.Seal()
 
 	rootCmd := &cobra.Command{
