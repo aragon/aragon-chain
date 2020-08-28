@@ -23,6 +23,8 @@ import (
 	"github.com/cosmos/cosmos-sdk/x/slashing"
 	"github.com/cosmos/cosmos-sdk/x/staking"
 	"github.com/cosmos/cosmos-sdk/x/supply"
+	"github.com/cosmos/cosmos-sdk/x/upgrade"
+	upgradeclient "github.com/cosmos/cosmos-sdk/x/upgrade/client"
 
 	"github.com/cosmos/ethermint/app/ante"
 	ethermintcodec "github.com/cosmos/ethermint/codec"
@@ -65,12 +67,13 @@ var (
 		mint.AppModuleBasic{},
 		distr.AppModuleBasic{},
 		gov.NewAppModuleBasic(
-			paramsclient.ProposalHandler, distr.ProposalHandler,
+			paramsclient.ProposalHandler, distr.ProposalHandler, upgradeclient.ProposalHandler,
 		),
 		params.AppModuleBasic{},
 		crisis.AppModuleBasic{},
 		slashing.AppModuleBasic{},
 		evidence.AppModuleBasic{},
+		upgrade.AppModuleBasic{},
 		evm.AppModuleBasic{},
 		faucet.AppModuleBasic{},
 	)
@@ -120,6 +123,7 @@ type App struct {
 	DistrKeeper    distr.Keeper
 	GovKeeper      gov.Keeper
 	CrisisKeeper   crisis.Keeper
+	UpgradeKeeper  upgrade.Keeper
 	ParamsKeeper   params.Keeper
 	EvidenceKeeper evidence.Keeper
 	EvmKeeper      evm.Keeper
@@ -135,8 +139,13 @@ type App struct {
 // NewApp returns a reference to a new initialized Aragon Chain
 // application.
 func NewApp(
-	logger log.Logger, db dbm.DB, traceStore io.Writer, loadLatest bool,
-	invCheckPeriod uint, baseAppOptions ...func(*bam.BaseApp),
+	logger log.Logger,
+	db dbm.DB,
+	traceStore io.Writer,
+	loadLatest bool,
+	skipUpgradeHeights map[int64]bool,
+	invCheckPeriod uint,
+	baseAppOptions ...func(*bam.BaseApp),
 ) *App {
 
 	cdc := ethermintcodec.MakeCodec(ModuleBasics)
@@ -149,7 +158,7 @@ func NewApp(
 	keys := sdk.NewKVStoreKeys(
 		bam.MainStoreKey, auth.StoreKey, staking.StoreKey,
 		supply.StoreKey, mint.StoreKey, distr.StoreKey, slashing.StoreKey,
-		gov.StoreKey, params.StoreKey, evidence.StoreKey,
+		gov.StoreKey, params.StoreKey, upgrade.StoreKey, evidence.StoreKey,
 		evm.StoreKey, faucet.StoreKey,
 	)
 
@@ -206,6 +215,9 @@ func NewApp(
 	app.EvmKeeper = evm.NewKeeper(
 		app.cdc, keys[evm.StoreKey], app.AccountKeeper,
 	)
+	app.UpgradeKeeper = upgrade.NewKeeper(
+		skipUpgradeHeights, keys[upgrade.StoreKey], app.cdc
+	)
 	app.FaucetKeeper = faucet.NewKeeper(
 		app.cdc, keys[faucet.StoreKey], app.SupplyKeeper,
 	)
@@ -223,7 +235,9 @@ func NewApp(
 	govRouter := gov.NewRouter()
 	govRouter.AddRoute(gov.RouterKey, gov.ProposalHandler).
 		AddRoute(params.RouterKey, params.NewParamChangeProposalHandler(app.ParamsKeeper)).
-		AddRoute(distr.RouterKey, distr.NewCommunityPoolSpendProposalHandler(app.DistrKeeper))
+		AddRoute(distr.RouterKey, distr.NewCommunityPoolSpendProposalHandler(app.DistrKeeper)).
+		AddRoute(upgrade.RouterKey, upgrade.NewSoftwareUpgradeProposalHandler(app.UpgradeKeeper))
+		
 	app.GovKeeper = gov.NewKeeper(
 		cdc, keys[gov.StoreKey], app.subspaces[gov.ModuleName], app.SupplyKeeper,
 		&stakingKeeper, govRouter,
@@ -269,8 +283,8 @@ func NewApp(
 	app.mm.SetOrderInitGenesis(
 		auth.ModuleName, distr.ModuleName, staking.ModuleName, bank.ModuleName,
 		slashing.ModuleName, gov.ModuleName, mint.ModuleName, supply.ModuleName,
-		crisis.ModuleName, genutil.ModuleName, evidence.ModuleName,
-		evm.ModuleName, faucet.ModuleName,
+		crisis.ModuleName, genutil.ModuleName, evidence.ModuleName, evm.ModuleName,
+		faucet.ModuleName,
 	)
 
 	app.mm.RegisterInvariants(&app.CrisisKeeper)
