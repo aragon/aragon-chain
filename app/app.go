@@ -217,7 +217,7 @@ func NewApp(
 		app.cdc, keys[evm.StoreKey], app.AccountKeeper,
 	)
 	app.UpgradeKeeper = upgrade.NewKeeper(
-		skipUpgradeHeights, keys[upgrade.StoreKey], app.cdc
+		skipUpgradeHeights, keys[upgrade.StoreKey], app.cdc,
 	)
 	app.FaucetKeeper = faucet.NewKeeper(
 		app.cdc, keys[faucet.StoreKey], app.SupplyKeeper,
