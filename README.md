@@ -53,5 +53,5 @@ For more, please refer to the [Aragon-Chain Docs](./docs/), which are also hoste
 
 The following chat channels and forums are a great spot to ask questions about Aragon-Chain:
 
-- [Cosmos Discord](https://discord.gg/W8trcGV)
-- [Cosmos Forum](https://forum.cosmos.network)
+- [Aragon Chain Discord](https://discord.gg/DAsyK7)
+- [Aragon Chain Forum](https://forum.aragon.org/c/aragon-chain)
