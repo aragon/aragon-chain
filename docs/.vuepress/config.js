@@ -54,7 +54,7 @@ module.exports = {
         text: 'Join the Aragon Chain Developer Forum to learn more.',
         url: 'https://forum.cosmos.network/',
         bg: 'linear-gradient(221.79deg, #3D6B99 -1.08%, #336699 95.88%)',
-        logo: 'logo.svg'
+        logo: '/logo.svg'
       },
       github: {
         title: 'Found an Issue?',
