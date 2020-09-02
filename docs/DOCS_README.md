@@ -11,7 +11,7 @@ If you want to open a PR on the Cosmos SDK to update the documentation, please f
 
 ## Docs Build Workflow
 
-The documentation for aragon-chain is hosted at https://docs.aragon-chain.zone/
+The documentation for aragon-chain is hosted at https://docs.chain.aragon.org//
 
 built from the files in this (`/docs`) directory for
 [master](https://github.com/aragon/aragon-chain/tree/master/docs).

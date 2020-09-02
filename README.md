@@ -42,3 +42,16 @@ parent:
 > **WARNING:** Aragon Chain is under VERY ACTIVE DEVELOPMENT and should be treated as pre-alpha software. This means it is not meant to be run in production, its APIs are subject to change without warning and should not be relied upon, and it should not be used to hold any value. We will remove this warning when we have a release that is stable, secure, and properly tested.
 
 **Note**: Requires [Go 1.14+](https://golang.org/dl/)
+
+## Quick Start
+
+To learn how the Aragon-Chain works from a high-level perspective, go to the [Introduction](./docs/intro/overview.md) section from the documentation.
+
+For more, please refer to the [Aragon-Chain Docs](./docs/), which are also hosted on [docs.chain.aragon](https://docs.chain.aragon.org/).
+
+### Community
+
+The following chat channels and forums are a great spot to ask questions about Aragon-Chain:
+
+- [Aragon Chain Discord](https://discord.gg/DAsyK7)
+- [Aragon Chain Forum](https://forum.aragon.org/c/aragon-chain)

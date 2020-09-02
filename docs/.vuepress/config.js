@@ -52,9 +52,9 @@ module.exports = {
       forum: {
         title: 'Aragon Chain Developer Forum',
         text: 'Join the Aragon Chain Developer Forum to learn more.',
-        url: 'https://forum.cosmos.network/',
+        url: 'https://forum.aragon.org/c/aragon-chain',
         bg: 'linear-gradient(221.79deg, #3D6B99 -1.08%, #336699 95.88%)',
-        logo: 'ethereum-white'
+        logo: 'aragon-white'
       },
       github: {
         title: 'Found an Issue?',
