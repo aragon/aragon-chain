@@ -27,7 +27,8 @@ cat $HOME/.aragonchaind/config/genesis.json | jq '.app_state["staking"]["params"
 cat $HOME/.aragonchaind/config/genesis.json | jq '.app_state["crisis"]["constant_fee"]["denom"]="ara"' > $HOME/.aragonchaind/config/tmp_genesis.json && mv $HOME/.aragonchaind/config/tmp_genesis.json $HOME/.aragonchaind/config/genesis.json
 cat $HOME/.aragonchaind/config/genesis.json | jq '.app_state["gov"]["deposit_params"]["min_deposit"][0]["denom"]="ara"' > $HOME/.aragonchaind/config/tmp_genesis.json && mv $HOME/.aragonchaind/config/tmp_genesis.json $HOME/.aragonchaind/config/genesis.json
 cat $HOME/.aragonchaind/config/genesis.json | jq '.app_state["mint"]["params"]["mint_denom"]="ara"' > $HOME/.aragonchaind/config/tmp_genesis.json && mv $HOME/.aragonchaind/config/tmp_genesis.json $HOME/.aragonchaind/config/genesis.json
-cat $HOME/.aragonchaind/config/genesis.json | jq '.app_state["faucet"]["enable_faucet"]=true' >  $HOME/.aragonchaind/config/tmp_genesis.json && mv $HOME/.aragonchaind/config/tmp_genesis.json $HOME/.aragonchaind/config/genesis.json
+cat $HOME/.aragonchaind/config/genesis.json | jq '.app_state["faucet"]["enable_faucet"]=true' > $HOME/.aragonchaind/config/tmp_genesis.json && mv $HOME/.aragonchaind/config/tmp_genesis.json $HOME/.aragonchaind/config/genesis.json
+cat $HOME/.aragonchaind/config/genesis.json | jq '.app_state["evm"]["params"]["evm_denom"]="ara"' > $HOME/.aragonchaind/config/tmp_genesis.json && mv $HOME/.aragonchaind/config/tmp_genesis.json $HOME/.aragonchaind/config/genesis.json
 
 # Allocate genesis accounts (cosmos formatted addresses)
 aragonchaind add-genesis-account $(aragonchaincli keys show mykey -a) 1000000000000000000ara
