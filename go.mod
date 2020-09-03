@@ -5,12 +5,11 @@ go 1.14
 require (
 	github.com/ChainSafe/go-schnorrkel v0.0.0-20200626160457-b38283118816 // indirect
 	github.com/cosmos/cosmos-sdk v0.39.1
-	github.com/cosmos/ethermint v0.1.0
+	github.com/cosmos/ethermint v0.2.0-rc0
 	github.com/cosmos/go-bip39 v0.0.0-20200817134856-d632e0d11689 // indirect
 	github.com/danieljoos/wincred v1.1.0 // indirect
 	github.com/ethereum/go-ethereum v1.9.20
 	github.com/fsnotify/fsnotify v1.4.9 // indirect
-	github.com/gorilla/mux v1.8.0 // indirect
 	github.com/keybase/go-keychain v0.0.0-20200502122510-cda31fe0c86d // indirect
 	github.com/magiconair/properties v1.8.2 // indirect
 	github.com/mitchellh/mapstructure v1.3.3 // indirect
@@ -34,6 +33,6 @@ require (
 )
 
 // use ChainSafe fork
-replace github.com/cosmos/ethermint => github.com/ChainSafe/ethermint v0.1.0
+replace github.com/cosmos/ethermint => github.com/ChainSafe/ethermint v0.2.0-rc0
 
 replace github.com/keybase/go-keychain => github.com/99designs/go-keychain v0.0.0-20191008050251-8e49817e8af4
