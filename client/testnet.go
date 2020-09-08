@@ -210,7 +210,7 @@ func InitTestnet(
 
 		accStakingTokens := sdk.TokensFromConsensusPower(5000)
 		coins := sdk.NewCoins(
-			sdk.NewCoin(types.DefaultDenom, accStakingTokens),
+			types.NewAra(accStakingTokens),
 		)
 
 		genAccounts = append(genAccounts, ethermint.EthAccount{
@@ -222,7 +222,7 @@ func InitTestnet(
 		msg := stakingtypes.NewMsgCreateValidator(
 			sdk.ValAddress(addr),
 			valPubKeys[i],
-			sdk.NewCoin(types.DefaultDenom, valTokens),
+			types.NewAra(valTokens),
 			stakingtypes.NewDescription(nodeDirName, "", "", "", ""),
 			stakingtypes.NewCommissionRates(sdk.OneDec(), sdk.OneDec(), sdk.OneDec()),
 			sdk.OneInt(),

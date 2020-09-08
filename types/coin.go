@@ -15,8 +15,14 @@ const (
 	DefaultDenom string = "ara"
 )
 
-// NewAra is a utility function that returns an "ara" coin with the given amount.
+// NewAra is a utility function that returns an "ara" coin with the given sdk.Int amount.
 // The function will panic if the provided amount is negative.
-func NewAra(amount int64) sdk.Coin {
+func NewAra(amount sdk.Int) sdk.Coin {
+	return sdk.NewCoin(DefaultDenom, amount)
+}
+
+// NewAraInt64 is a utility function that returns an "ara" coin with the given int64 amount.
+// The function will panic if the provided amount is negative.
+func NewAraInt64(amount int64) sdk.Coin {
 	return sdk.NewInt64Coin(DefaultDenom, amount)
 }
