@@ -37,7 +37,10 @@ import (
 	stakingtypes "github.com/cosmos/cosmos-sdk/x/staking/types"
 
 	"github.com/cosmos/ethermint/crypto"
-	"github.com/cosmos/ethermint/types"
+	ethermint "github.com/cosmos/ethermint/types"
+	evmtypes "github.com/cosmos/ethermint/x/evm/types"
+
+	"github.com/aragon/aragon-chain/types"
 )
 
 var (
@@ -51,7 +54,6 @@ var (
 )
 
 const nodeDirPerm = 0755
-const tokenDenom = "ara"
 
 // TestnetCmd initializes all files for tendermint testnet and application
 func TestnetCmd(ctx *server.Context, cdc *codec.Codec,
@@ -94,7 +96,7 @@ Note, strict routability for addresses is turned off in the config file.`,
 	cmd.Flags().String(flagNodeCLIHome, "aragonchaincli", "Home directory of the node's cli configuration")
 	cmd.Flags().String(flagStartingIPAddress, "192.168.0.1", "Starting IP address (192.168.0.1 results in persistent peers list ID0@192.168.0.1:46656, ID1@192.168.0.2:46656, ...)")
 	cmd.Flags().String(flags.FlagChainID, "", "genesis file chain-id, if left blank will be randomly created")
-	cmd.Flags().String(server.FlagMinGasPrices, fmt.Sprintf("0.000006%s", tokenDenom), "Minimum gas prices to accept for transactions; All fees in a tx must meet this minimum (e.g. 0.01ara)")
+	cmd.Flags().String(server.FlagMinGasPrices, fmt.Sprintf("0.000006%s", types.DefaultDenom), "Minimum gas prices to accept for transactions; All fees in a tx must meet this minimum (e.g. 0.01ara)")
 	cmd.Flags().String(flags.FlagKeyringBackend, flags.DefaultKeyringBackend, "Select keyring's backend (os|file|test)")
 	cmd.Flags().String(flagKeyAlgo, string(crypto.EthSecp256k1), "Key signing algorithm to generate keys for")
 	return cmd
@@ -208,10 +210,10 @@ func InitTestnet(
 
 		accStakingTokens := sdk.TokensFromConsensusPower(5000)
 		coins := sdk.NewCoins(
-			sdk.NewCoin(tokenDenom, accStakingTokens),
+			sdk.NewCoin(types.DefaultDenom, accStakingTokens),
 		)
 
-		genAccounts = append(genAccounts, types.EthAccount{
+		genAccounts = append(genAccounts, ethermint.EthAccount{
 			BaseAccount: authtypes.NewBaseAccount(addr, coins, nil, 0, 0),
 			CodeHash:    ethcrypto.Keccak256(nil),
 		})
@@ -220,7 +222,7 @@ func InitTestnet(
 		msg := stakingtypes.NewMsgCreateValidator(
 			sdk.ValAddress(addr),
 			valPubKeys[i],
-			sdk.NewCoin(tokenDenom, valTokens),
+			sdk.NewCoin(types.DefaultDenom, valTokens),
 			stakingtypes.NewDescription(nodeDirName, "", "", "", ""),
 			stakingtypes.NewCommissionRates(sdk.OneDec(), sdk.OneDec(), sdk.OneDec()),
 			sdk.OneInt(),
@@ -284,26 +286,32 @@ func initGenFiles(
 	var stakingGenState stakingtypes.GenesisState
 	cdc.MustUnmarshalJSON(appGenState[stakingtypes.ModuleName], &stakingGenState)
 
-	stakingGenState.Params.BondDenom = tokenDenom
+	stakingGenState.Params.BondDenom = types.DefaultDenom
 	appGenState[stakingtypes.ModuleName] = cdc.MustMarshalJSON(stakingGenState)
 
 	var govGenState govtypes.GenesisState
 	cdc.MustUnmarshalJSON(appGenState[govtypes.ModuleName], &govGenState)
 
-	govGenState.DepositParams.MinDeposit[0].Denom = tokenDenom
+	govGenState.DepositParams.MinDeposit[0].Denom = types.DefaultDenom
 	appGenState[govtypes.ModuleName] = cdc.MustMarshalJSON(govGenState)
 
 	var mintGenState mint.GenesisState
 	cdc.MustUnmarshalJSON(appGenState[mint.ModuleName], &mintGenState)
 
-	mintGenState.Params.MintDenom = tokenDenom
+	mintGenState.Params.MintDenom = types.DefaultDenom
 	appGenState[mint.ModuleName] = cdc.MustMarshalJSON(mintGenState)
 
 	var crisisGenState crisis.GenesisState
 	cdc.MustUnmarshalJSON(appGenState[crisis.ModuleName], &crisisGenState)
 
-	crisisGenState.ConstantFee.Denom = tokenDenom
+	crisisGenState.ConstantFee.Denom = types.DefaultDenom
 	appGenState[crisis.ModuleName] = cdc.MustMarshalJSON(crisisGenState)
+
+	var evmGenState evmtypes.GenesisState
+	cdc.MustUnmarshalJSON(appGenState[evmtypes.ModuleName], &evmGenState)
+
+	evmGenState.Params.EvmDenom = types.DefaultDenom
+	appGenState[evmtypes.ModuleName] = cdc.MustMarshalJSON(evmGenState)
 
 	appGenStateJSON, err := codec.MarshalJSONIndent(cdc, appGenState)
 	if err != nil {
