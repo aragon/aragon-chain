@@ -5,24 +5,24 @@ import (
 )
 
 const (
-	// DefaultDenom defines the default coin denomination used in Aragon Chain in:
+	// ARA defines the default coin denomination used in Aragon Chain in:
 	//
 	// - Staking parameters: denomination used as stake in the dPoS chain
 	// - Mint parameters: denomination minted due to fee distribution rewards
 	// - Governance parameters: denomination used for spam prevention in proposal deposits
 	// - Crisis parameters: constant fee denomination used for spam prevention to check broken invariant
 	// - EVM parameters: denomination used for running EVM state transitions in Ethermint.
-	DefaultDenom string = "ara"
+	ARA string = "ara"
 )
 
-// NewAra is a utility function that returns an "ara" coin with the given sdk.Int amount.
+// NewAraCoin is a utility function that returns an "ara" coin with the given sdk.Int amount.
 // The function will panic if the provided amount is negative.
-func NewAra(amount sdk.Int) sdk.Coin {
-	return sdk.NewCoin(DefaultDenom, amount)
+func NewAraCoin(amount sdk.Int) sdk.Coin {
+	return sdk.NewCoin(ARA, amount)
 }
 
-// NewAraInt64 is a utility function that returns an "ara" coin with the given int64 amount.
+// NewAraCoinInt64 is a utility function that returns an "ara" coin with the given int64 amount.
 // The function will panic if the provided amount is negative.
-func NewAraInt64(amount int64) sdk.Coin {
-	return sdk.NewInt64Coin(DefaultDenom, amount)
+func NewAraCoinInt64(amount int64) sdk.Coin {
+	return sdk.NewInt64Coin(ARA, amount)
 }

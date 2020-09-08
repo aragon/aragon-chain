@@ -96,7 +96,7 @@ Note, strict routability for addresses is turned off in the config file.`,
 	cmd.Flags().String(flagNodeCLIHome, "aragonchaincli", "Home directory of the node's cli configuration")
 	cmd.Flags().String(flagStartingIPAddress, "192.168.0.1", "Starting IP address (192.168.0.1 results in persistent peers list ID0@192.168.0.1:46656, ID1@192.168.0.2:46656, ...)")
 	cmd.Flags().String(flags.FlagChainID, "", "genesis file chain-id, if left blank will be randomly created")
-	cmd.Flags().String(server.FlagMinGasPrices, fmt.Sprintf("0.000006%s", types.DefaultDenom), "Minimum gas prices to accept for transactions; All fees in a tx must meet this minimum (e.g. 0.01ara)")
+	cmd.Flags().String(server.FlagMinGasPrices, fmt.Sprintf("0.000006%s", types.ARA), "Minimum gas prices to accept for transactions; All fees in a tx must meet this minimum (e.g. 0.01ara)")
 	cmd.Flags().String(flags.FlagKeyringBackend, flags.DefaultKeyringBackend, "Select keyring's backend (os|file|test)")
 	cmd.Flags().String(flagKeyAlgo, string(crypto.EthSecp256k1), "Key signing algorithm to generate keys for")
 	return cmd
@@ -210,7 +210,7 @@ func InitTestnet(
 
 		accStakingTokens := sdk.TokensFromConsensusPower(5000)
 		coins := sdk.NewCoins(
-			types.NewAra(accStakingTokens),
+			types.NewAraCoin(accStakingTokens),
 		)
 
 		genAccounts = append(genAccounts, ethermint.EthAccount{
@@ -222,7 +222,7 @@ func InitTestnet(
 		msg := stakingtypes.NewMsgCreateValidator(
 			sdk.ValAddress(addr),
 			valPubKeys[i],
-			types.NewAra(valTokens),
+			types.NewAraCoin(valTokens),
 			stakingtypes.NewDescription(nodeDirName, "", "", "", ""),
 			stakingtypes.NewCommissionRates(sdk.OneDec(), sdk.OneDec(), sdk.OneDec()),
 			sdk.OneInt(),
@@ -286,31 +286,31 @@ func initGenFiles(
 	var stakingGenState stakingtypes.GenesisState
 	cdc.MustUnmarshalJSON(appGenState[stakingtypes.ModuleName], &stakingGenState)
 
-	stakingGenState.Params.BondDenom = types.DefaultDenom
+	stakingGenState.Params.BondDenom = types.ARA
 	appGenState[stakingtypes.ModuleName] = cdc.MustMarshalJSON(stakingGenState)
 
 	var govGenState govtypes.GenesisState
 	cdc.MustUnmarshalJSON(appGenState[govtypes.ModuleName], &govGenState)
 
-	govGenState.DepositParams.MinDeposit[0].Denom = types.DefaultDenom
+	govGenState.DepositParams.MinDeposit[0].Denom = types.ARA
 	appGenState[govtypes.ModuleName] = cdc.MustMarshalJSON(govGenState)
 
 	var mintGenState mint.GenesisState
 	cdc.MustUnmarshalJSON(appGenState[mint.ModuleName], &mintGenState)
 
-	mintGenState.Params.MintDenom = types.DefaultDenom
+	mintGenState.Params.MintDenom = types.ARA
 	appGenState[mint.ModuleName] = cdc.MustMarshalJSON(mintGenState)
 
 	var crisisGenState crisis.GenesisState
 	cdc.MustUnmarshalJSON(appGenState[crisis.ModuleName], &crisisGenState)
 
-	crisisGenState.ConstantFee.Denom = types.DefaultDenom
+	crisisGenState.ConstantFee.Denom = types.ARA
 	appGenState[crisis.ModuleName] = cdc.MustMarshalJSON(crisisGenState)
 
 	var evmGenState evmtypes.GenesisState
 	cdc.MustUnmarshalJSON(appGenState[evmtypes.ModuleName], &evmGenState)
 
-	evmGenState.Params.EvmDenom = types.DefaultDenom
+	evmGenState.Params.EvmDenom = types.ARA
 	appGenState[evmtypes.ModuleName] = cdc.MustMarshalJSON(evmGenState)
 
 	appGenStateJSON, err := codec.MarshalJSONIndent(cdc, appGenState)
