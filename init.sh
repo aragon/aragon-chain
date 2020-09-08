@@ -18,7 +18,7 @@ aragonchaincli config indent true
 aragonchaincli config trust-node true
 
 # if $KEY exists it should be deleted
-aragonchaincli keys add $KEY --algo=eth_secp256k1
+aragonchaincli keys add $KEY
 
 # Set moniker and chain-id for Aragon (Moniker can be anything, chain-id must be an integer)
 aragonchaind init $MONIKER --chain-id $CHAINID
