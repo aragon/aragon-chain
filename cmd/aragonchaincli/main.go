@@ -75,8 +75,8 @@ func main() {
 		flags.NewCompletionCmd(rootCmd, true),
 	)
 
-	// Add flags and prefix all env exposed with EM
-	executor := cli.PrepareMainCmd(rootCmd, "EM", app.DefaultCLIHome)
+	// Add flags and prefix all env exposed with AC
+	executor := cli.PrepareMainCmd(rootCmd, "AC", app.DefaultCLIHome)
 
 	err := executor.Execute()
 	if err != nil {
