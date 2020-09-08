@@ -135,6 +135,22 @@ install:
 clean:
 	@rm -rf ./build ./vendor
 
+docker-build:
+	docker build -t ${DOCKER_IMAGE}:${DOCKER_TAG} .
+	docker tag ${DOCKER_IMAGE}:${DOCKER_TAG} ${DOCKER_IMAGE}:latest
+	docker tag ${DOCKER_IMAGE}:${DOCKER_TAG} ${DOCKER_IMAGE}:${COMMIT_HASH}
+	# update old container
+	docker rm aragonchain
+	# create a new container from the latest image
+	docker create --name aragonchain -t -i cosmos/aragonchain:latest aragonchain
+	# move the binaries to the ./build directory
+	mkdir -p ./build/
+	docker cp aragonchain:/usr/bin/aragonchaind ./build/ ; \
+	docker cp aragonchain:/usr/bin/aragonchaincli ./build/
+
+docker-localnet:
+	docker build -f ./networks/local/aragonchainnode/Dockerfile . -t aragonchaind/node
+
 ###############################################################################
 ###                          Tools & Dependencies                           ###
 ###############################################################################
@@ -262,3 +278,51 @@ godocs:
 	godoc -http=:6060
 
 .PHONY: docs-serve docs-build
+
+###############################################################################
+###                                Localnet                                 ###
+###############################################################################
+
+build-docker-local-aragonchain:
+	@$(MAKE) -C networks/local
+
+# Run a 4-node testnet locally
+localnet-start: localnet-stop
+ifeq ($(OS),Windows_NT)
+	mkdir build &
+	@$(MAKE) docker-localnet
+
+	IF not exist "build/node0/$(ARAGON_CHAIN_DAEMON_BINARY)/config/genesis.json" docker run --rm -v $(CURDIR)/build\aragonchain\Z aragonchaind/node "aragonchaind testnet --v 4 -o /aragonchain --starting-ip-address 192.168.10.2 --keyring-backend=test"
+	docker-compose up -d
+else
+	mkdir -p ./build/
+	@$(MAKE) docker-localnet
+
+	if ! [ -f build/node0/$(ARAGON_CHAIN_DAEMON_BINARY)/config/genesis.json ]; then docker run --rm -v $(CURDIR)/build:/aragonchain:Z aragonchaind/node "aragonchaind testnet --v 4 -o /aragonchain --starting-ip-address 192.168.10.2 --keyring-backend=test"; fi
+	docker-compose up -d
+endif
+
+localnet-stop:
+	docker-compose down
+
+# clean testnet
+localnet-clean:
+	docker-compose down
+	sudo rm -rf build/*
+
+ # reset testnet
+localnet-unsafe-reset:
+	docker-compose down
+ifeq ($(OS),Windows_NT)
+	@docker run --rm -v $(CURDIR)/build\aragonchain\Z aragonchaind/node "aragonchaind unsafe-reset-all --home=/aragonchain/node0/aragonchaind"
+	@docker run --rm -v $(CURDIR)/build\aragonchain\Z aragonchaind/node "aragonchaind unsafe-reset-all --home=/aragonchain/node1/aragonchaind"
+	@docker run --rm -v $(CURDIR)/build\aragonchain\Z aragonchaind/node "aragonchaind unsafe-reset-all --home=/aragonchain/node2/aragonchaind"
+	@docker run --rm -v $(CURDIR)/build\aragonchain\Z aragonchaind/node "aragonchaind unsafe-reset-all --home=/aragonchain/node3/aragonchaind"
+else
+	@docker run --rm -v $(CURDIR)/build:/aragonchain:Z aragonchaind/node "aragonchaind unsafe-reset-all --home=/aragonchain/node0/aragonchaind"
+	@docker run --rm -v $(CURDIR)/build:/aragonchain:Z aragonchaind/node "aragonchaind unsafe-reset-all --home=/aragonchain/node1/aragonchaind"
+	@docker run --rm -v $(CURDIR)/build:/aragonchain:Z aragonchaind/node "aragonchaind unsafe-reset-all --home=/aragonchain/node2/aragonchaind"
+	@docker run --rm -v $(CURDIR)/build:/aragonchain:Z aragonchaind/node "aragonchaind unsafe-reset-all --home=/aragonchain/node3/aragonchaind"
+endif
+
+.PHONY: build-docker-local-aragonchain localnet-start localnet-stop

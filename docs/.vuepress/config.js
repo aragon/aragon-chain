@@ -87,7 +87,7 @@ module.exports = {
           title: 'Community',
           children: [
             {title: 'Cosmos Community', url: 'https://discord.gg/W8trcGV'},
-            {title: 'Aragon Chain Forum [coming soon]', url: 'https://forum.cosmos.network/c/aragon-chain'},
+            {title: 'Aragon Chain Forum', url: 'https://forum.aragon.org/c/aragon-chain'},
             {title: 'Aragon Chain Discord', url: 'https://discord.gg/Vjw2RQ7'}
           ]
         },
