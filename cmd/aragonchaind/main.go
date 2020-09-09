@@ -28,10 +28,10 @@ import (
 	"github.com/cosmos/cosmos-sdk/x/staking"
 
 	ethermintclient "github.com/cosmos/ethermint/client"
+	ethermintcodec "github.com/cosmos/ethermint/codec"
 	ethermintcrypto "github.com/cosmos/ethermint/crypto"
 
 	"github.com/aragon/aragon-chain/app"
-	"github.com/aragon/aragon-chain/codec"
 	aragon "github.com/aragon/aragon-chain/types"
 )
 
@@ -42,7 +42,7 @@ var invCheckPeriod uint
 func main() {
 	cobra.EnableCommandSorting = false
 
-	cdc := codec.MakeCodec(app.ModuleBasics)
+	cdc := ethermintcodec.MakeCodec(app.ModuleBasics)
 
 	tmamino.RegisterKeyType(ethermintcrypto.PubKeySecp256k1{}, ethermintcrypto.PubKeyAminoName)
 	tmamino.RegisterKeyType(ethermintcrypto.PrivKeySecp256k1{}, ethermintcrypto.PrivKeyAminoName)
@@ -86,7 +86,7 @@ func main() {
 	server.AddCommands(ctx, cdc, rootCmd, newApp, exportAppStateAndTMValidators)
 
 	// prepare and add flags
-	executor := cli.PrepareBaseCmd(rootCmd, "EM", app.DefaultNodeHome)
+	executor := cli.PrepareBaseCmd(rootCmd, "AR", app.DefaultNodeHome)
 	rootCmd.PersistentFlags().UintVar(&invCheckPeriod, flagInvCheckPeriod,
 		0, "Assert registered invariants every N blocks")
 	err := executor.Execute()
