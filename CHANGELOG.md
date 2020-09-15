@@ -49,3 +49,5 @@ Ref: https://keepachangelog.com/en/1.0.0/
   * (ethermint)  Bump Ethermint version to [v0.2.0-rc1](https://github.com/ChainSafe/ethermint/releases/tag/v0.2.0-rc1)
   * (types) Define constants for `ARA` token.
   * (types) Update [BIP44](https://github.com/bitcoin/bips/blob/master/bip-0044.mediawiki) coin type to `60` to satisfy [EIP84](https://github.com/ethereum/EIPs/issues/84).
+* [\#17](https://github.com/aragon/aragon-chain/pull/17) Update testnet cmd:
+  * (client) `aragonchaind testnet` command takes multiple ip addresses and adds them to the genesis + configurations.
