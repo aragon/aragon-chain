@@ -63,4 +63,4 @@ to see metamask logs, go to top right circle -> settings -> advanced -> download
 
 ## Known issues
 
-Currently, it's not possible to add custom tokens (even for Aras) unless you deploy a token contract (eg: ERC20).
+Currently, it's not possible to add custom tokens (even for ARAs) unless you deploy a token contract (eg: ERC20).
