@@ -5,7 +5,11 @@ go 1.14
 require (
 	github.com/ChainSafe/go-schnorrkel v0.0.0-20200626160457-b38283118816 // indirect
 	github.com/cosmos/cosmos-sdk v0.39.1
+<<<<<<< HEAD
 	github.com/cosmos/ethermint v0.2.0-rc6
+=======
+	github.com/cosmos/ethermint v0.2.0-rc4
+>>>>>>> 45d9819a94ca77bd45f16997f7514f78f5fe7e6c
 	github.com/cosmos/go-bip39 v0.0.0-20200817134856-d632e0d11689 // indirect
 	github.com/danieljoos/wincred v1.1.0 // indirect
 	github.com/ethereum/go-ethereum v1.9.21

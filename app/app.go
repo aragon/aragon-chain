@@ -205,11 +205,11 @@ func NewApp(
 	app.CrisisKeeper = crisis.NewKeeper(
 		app.subspaces[crisis.ModuleName], invCheckPeriod, app.SupplyKeeper, auth.FeeCollectorName,
 	)
-	app.EvmKeeper = evm.NewKeeper(
-		app.cdc, keys[evm.StoreKey], app.subspaces[evm.ModuleName], app.AccountKeeper,
-	)
 	app.UpgradeKeeper = upgrade.NewKeeper(
 		skipUpgradeHeights, keys[upgrade.StoreKey], app.cdc,
+	)
+	app.EvmKeeper = evm.NewKeeper(
+		app.cdc, keys[evm.StoreKey], app.subspaces[evm.ModuleName], app.AccountKeeper,
 	)
 	app.FaucetKeeper = faucet.NewKeeper(
 		app.cdc, keys[faucet.StoreKey], app.SupplyKeeper,

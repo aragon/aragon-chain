@@ -292,13 +292,13 @@ ifeq ($(OS),Windows_NT)
 	mkdir build &
 	@$(MAKE) docker-localnet
 
-	IF not exist "build/node0/$(ARAGON_CHAIN_DAEMON_BINARY)/config/genesis.json" docker run --rm -v $(CURDIR)/build\aragonchain\Z aragonchaind/node "aragonchaind testnet --v 4 -o /aragonchain --starting-ip-address 192.168.10.2 --keyring-backend=test"
+	IF not exist "build/node0/$(ARAGON_CHAIN_DAEMON_BINARY)/config/genesis.json" docker run --rm -v $(CURDIR)/build\aragonchain\Z aragonchaind/node "aragonchaind testnet --v 4 -o /aragonchain --starting-ip-address 192.168.10.2 --node-daemon-home=aragonchaind --node-cli-home=aragonchaincli --coin-denom=ara --keyring-backend=test"
 	docker-compose up -d
 else
 	mkdir -p ./build/
 	@$(MAKE) docker-localnet
 
-	if ! [ -f build/node0/$(ARAGON_CHAIN_DAEMON_BINARY)/config/genesis.json ]; then docker run --rm -v $(CURDIR)/build:/aragonchain:Z aragonchaind/node "aragonchaind testnet --v 4 -o /aragonchain --starting-ip-address 192.168.10.2 --keyring-backend=test"; fi
+	if ! [ -f build/node0/$(ARAGON_CHAIN_DAEMON_BINARY)/config/genesis.json ]; then docker run --rm -v $(CURDIR)/build:/aragonchain:Z aragonchaind/node "aragonchaind testnet --v 4 -o /aragonchain --starting-ip-address 192.168.10.2 --node-daemon-home=aragonchaind --node-cli-home=aragonchaincli --coin-denom=ara --keyring-backend=test"; fi
 	docker-compose up -d
 endif
 
