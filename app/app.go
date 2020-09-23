@@ -36,16 +36,7 @@ import (
 	"github.com/tendermint/tendermint/libs/log"
 	tmos "github.com/tendermint/tendermint/libs/os"
 	dbm "github.com/tendermint/tm-db"
-
-	aragon "github.com/aragon/aragon-chain/types"
 )
-
-func init() {
-	// set the address prefixes
-	config := sdk.GetConfig()
-	aragon.SetBech32Prefixes(config)
-	aragon.SetBip44CoinType(config)
-}
 
 const appName = "AragonChain"
 

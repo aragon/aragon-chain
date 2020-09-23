@@ -30,6 +30,6 @@ require (
 )
 
 // use ChainSafe fork
-replace github.com/cosmos/ethermint => github.com/ChainSafe/ethermint v0.2.0-rc6
+replace github.com/cosmos/ethermint => github.com/ChainSafe/ethermint v0.2.0-rc8
 
 replace github.com/keybase/go-keychain => github.com/99designs/go-keychain v0.0.0-20191008050251-8e49817e8af4
