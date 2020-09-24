@@ -42,7 +42,7 @@ aragonchaincli rest-server --laddr "tcp://localhost:8545" --unlock-key $KEY --ch
 You should see the logs from the REST and the RPC server.
 
 ```bash
-I[2020-07-17|16:54:35.037] Starting application REST service (chain-id: "8")... module=rest-server
+I[2020-07-17|16:54:35.037] Starting application REST service (chain-id: "aragonchain-8")... module=rest-server
 I[2020-07-17|16:54:35.037] Starting RPC HTTP server on 127.0.0.1:8545   module=rest-server
 ```
 

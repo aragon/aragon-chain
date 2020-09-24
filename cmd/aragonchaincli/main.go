@@ -67,7 +67,9 @@ func main() {
 		client.ConfigCmd(app.DefaultCLIHome),
 		queryCmd(cdc),
 		txCmd(cdc),
-		rpc.EmintServeCmd(cdc),
+		ethermintclient.ValidateChainID(
+			rpc.EmintServeCmd(cdc),
+		),
 		flags.LineBreak,
 		ethermintclient.KeyCommands(),
 		flags.LineBreak,

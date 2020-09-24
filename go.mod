@@ -5,7 +5,7 @@ go 1.14
 require (
 	github.com/ChainSafe/go-schnorrkel v0.0.0-20200626160457-b38283118816 // indirect
 	github.com/cosmos/cosmos-sdk v0.39.1
-	github.com/cosmos/ethermint v0.2.0-rc8
+	github.com/cosmos/ethermint v0.2.0
 	github.com/cosmos/go-bip39 v0.0.0-20200817134856-d632e0d11689 // indirect
 	github.com/danieljoos/wincred v1.1.0 // indirect
 	github.com/ethereum/go-ethereum v1.9.21
@@ -30,6 +30,6 @@ require (
 )
 
 // use ChainSafe fork
-replace github.com/cosmos/ethermint => github.com/ChainSafe/ethermint v0.2.0-rc8
+replace github.com/cosmos/ethermint => github.com/ChainSafe/ethermint v0.2.0
 
 replace github.com/keybase/go-keychain => github.com/99designs/go-keychain v0.0.0-20191008050251-8e49817e8af4

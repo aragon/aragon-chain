@@ -219,7 +219,7 @@ being produced and the app hashes are the same for each node, there should not b
 Whereas the logs for the REST & RPC server would look like:
 
 ```bash
-I[2020-07-30|09:39:17.488] Starting application REST service (chain-id: "7305661614933169792")... module=rest-server
+I[2020-07-30|09:39:17.488] Starting application REST service (chain-id: "aragonchain-7305661614933169792")... module=rest-server
 I[2020-07-30|09:39:17.488] Starting RPC HTTP server on 127.0.0.1:8545   module=rest-server
 ...
 ```
