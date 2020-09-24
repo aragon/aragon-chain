@@ -22,7 +22,7 @@ This guide helps you create a single validator node that runs a network locally 
 ```bash
 $MONIKER=testing
 $KEY=mykey
-$CHAINID=8
+$CHAINID="aragonchain-8"
 
 aragond init $MONIKER --chain-id=$CHAINID
 ```
@@ -97,8 +97,8 @@ make localnet-start
 This command creates a 4-node network using the `aragondnode` Docker image.
 The ports for each node are found in this table:
 
-| Node ID          | P2P Port | Tendermint RPC Port | REST/ Ethereum JSON-RPC Port | WebSocket Port |
-|------------------|----------|---------------------|------------------------------|----------------|
+| Node ID       | P2P Port | Tendermint RPC Port | REST/ Ethereum JSON-RPC Port | WebSocket Port |
+|---------------|----------|---------------------|------------------------------|----------------|
 | `aragonnode0` | `26656`  | `26657`             | `8545`                       | `8546`         |
 | `aragonnode1` | `26659`  | `26660`             | `8547`                       | `8548`         |
 | `aragonnode2` | `26661`  | `26662`             | `8549`                       | `8550`         |
@@ -219,7 +219,7 @@ being produced and the app hashes are the same for each node, there should not b
 Whereas the logs for the REST & RPC server would look like:
 
 ```bash
-I[2020-07-30|09:39:17.488] Starting application REST service (chain-id: "aragonchain-7305661614933169792")... module=rest-server
+I[2020-07-30|09:39:17.488] Starting application REST service (chain-id: "aragonchain-8")... module=rest-server
 I[2020-07-30|09:39:17.488] Starting RPC HTTP server on 127.0.0.1:8545   module=rest-server
 ...
 ```
