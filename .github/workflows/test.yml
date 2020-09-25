@@ -1,6 +1,6 @@
 name: Tests / Code Coverage
 #  Tests / Code Coverage workflow runs unit tests and uploads a code coverage report
-#  This workflow is run on pushes to development & every Pull Requests where a .go, .mod, .sum have been changed
+#  This workflow is run on pushes to development & every Pull Requests where a .go, .mod, .sum, .sol have been changed
 on:
   pull_request:
   push:
@@ -9,17 +9,17 @@ on:
 jobs:
   test-coverage-upload:
     runs-on: ubuntu-latest
-    needs: split-test-files
     timeout-minutes: 10
     steps:
       - uses: actions/checkout@v2
-      - uses: technote-space/get-diff-action@v3.0.1
+      - uses: technote-space/get-diff-action@v3.2
         id: git_diff
         with:
           SUFFIX_FILTER: |
             .go
             .mod
             .sum
+            .sol
       - uses: codecov/codecov-action@v1
         with:
           file: ./coverage.txt
