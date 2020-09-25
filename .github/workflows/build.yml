@@ -24,6 +24,7 @@ jobs:
             .go
             .mod
             .sum
+            .sol
       - run: |
           make build
         if: "env.GIT_DIFF != ''"

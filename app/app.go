@@ -220,7 +220,6 @@ func NewApp(
 		cdc, keys[evidence.StoreKey], app.subspaces[evidence.ModuleName], &app.StakingKeeper, app.SlashingKeeper,
 	)
 	evidenceRouter := evidence.NewRouter()
-	// TODO: Register evidence routes.
 	evidenceKeeper.SetRouter(evidenceRouter)
 	app.EvidenceKeeper = *evidenceKeeper
 
