@@ -21,7 +21,7 @@ You can also start a node from scratch by running `./init.sh` from the Aragon Ch
 In another tab start the REST server. Here replace `mykey` with the name of the key that you want to use and set the `chain-id` the chain identifier of your application.
 
 ```bash
-aragonchaincli rest-server --laddr "tcp://localhost:8545" --unlock-key mykey --chain-id 1
+aragonchaincli rest-server --laddr "tcp://localhost:8545" --unlock-key mykey --chain-id "aragonchain-1"
 ```
 
 ## Adding a custom Network for Aragon Chain
@@ -50,7 +50,7 @@ aragonchaincli keys unsafe-export-eth-key mykey
 Go back to the browser and select the `Private Key` option. Then paste the private key exported from
 the `unsafe-export-eth-key` command.
 
-Your account balance should show up as `1 PHOTON` and do transfers as usual.
+Your account balance should show up as `1 ARA` and do transfers as usual.
 
 ::: tip
 If it takes some time to load the balance of the account, change the network to `Main Ethereum
@@ -63,4 +63,4 @@ to see metamask logs, go to top right circle -> settings -> advanced -> download
 
 ## Known issues
 
-Currently, it's not possible to add custom tokens (even for Photons) unless you deploy a token contract (eg: ERC20).
+Currently, it's not possible to add custom tokens (even for ARAs) unless you deploy a token contract (eg: ERC20).

@@ -26,7 +26,7 @@ to keep your binaries and configuration files.
 In another terminal window or tab, run the Ethereum JSON-RPC server as well as the SDK REST server:
 
 ```bash
-aragonchaincli rest-server --laddr "tcp://localhost:8545" --unlock-key mykey --chain-id 8
+aragonchaincli rest-server --laddr "tcp://localhost:8545" --unlock-key mykey --chain-id "aragonchain-8"
 ```
 
 ## Manual setup

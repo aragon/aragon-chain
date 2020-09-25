@@ -119,7 +119,7 @@ For further information on how to run a node, please refer to [this](./../quicks
 In another Terminal wintdow/tab, start the [REST and JSON-RPC server](./../quickstart/clients.md#rest-and-tendermint-rpc.md):
 
 ```bash
-aragonchaincli rest-server --laddr "tcp://localhost:8545" --unlock-key mykey--chain-id 8 --trace
+aragonchaincli rest-server --laddr "tcp://localhost:8545" --unlock-key mykey--chain-id "aragonchain-8" --trace
 ```
 
 ## Deploy contract

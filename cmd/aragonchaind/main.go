@@ -28,10 +28,10 @@ import (
 	"github.com/cosmos/cosmos-sdk/x/staking"
 
 	ethermintclient "github.com/cosmos/ethermint/client"
+	ethermintcodec "github.com/cosmos/ethermint/codec"
 	ethermintcrypto "github.com/cosmos/ethermint/crypto"
 
 	"github.com/aragon/aragon-chain/app"
-	"github.com/aragon/aragon-chain/codec"
 	aragon "github.com/aragon/aragon-chain/types"
 )
 
@@ -42,7 +42,7 @@ var invCheckPeriod uint
 func main() {
 	cobra.EnableCommandSorting = false
 
-	cdc := codec.MakeCodec(app.ModuleBasics)
+	cdc := ethermintcodec.MakeCodec(app.ModuleBasics)
 
 	tmamino.RegisterKeyType(ethermintcrypto.PubKeySecp256k1{}, ethermintcrypto.PubKeyAminoName)
 	tmamino.RegisterKeyType(ethermintcrypto.PrivKeySecp256k1{}, ethermintcrypto.PrivKeyAminoName)
@@ -54,6 +54,7 @@ func main() {
 
 	config := sdk.GetConfig()
 	aragon.SetBech32Prefixes(config)
+	aragon.SetBip44CoinType(config)
 	config.Seal()
 
 	ctx := server.NewDefaultContext()
@@ -75,7 +76,7 @@ func main() {
 			app.DefaultNodeHome, app.DefaultCLIHome,
 		),
 		genutilcli.ValidateGenesisCmd(ctx, cdc, app.ModuleBasics),
-
+		ethermintclient.TestnetCmd(ctx, cdc, app.ModuleBasics, auth.GenesisAccountIterator{}),
 		// AddGenesisAccountCmd allows users to add accounts to the genesis file
 		AddGenesisAccountCmd(ctx, cdc, app.DefaultNodeHome, app.DefaultCLIHome),
 		flags.NewCompletionCmd(rootCmd, true),
@@ -85,7 +86,7 @@ func main() {
 	server.AddCommands(ctx, cdc, rootCmd, newApp, exportAppStateAndTMValidators)
 
 	// prepare and add flags
-	executor := cli.PrepareBaseCmd(rootCmd, "EM", app.DefaultNodeHome)
+	executor := cli.PrepareBaseCmd(rootCmd, "AR", app.DefaultNodeHome)
 	rootCmd.PersistentFlags().UintVar(&invCheckPeriod, flagInvCheckPeriod,
 		0, "Assert registered invariants every N blocks")
 	err := executor.Execute()
@@ -100,8 +101,11 @@ func newApp(logger log.Logger, db dbm.DB, traceStore io.Writer) abci.Application
 		db,
 		traceStore,
 		true,
+		map[int64]bool{},
 		0,
 		baseapp.SetPruning(storetypes.NewPruningOptionsFromString(viper.GetString("pruning"))),
+		baseapp.SetMinGasPrices(viper.GetString(server.FlagMinGasPrices)),
+		baseapp.SetHaltHeight(uint64(viper.GetInt(server.FlagHaltHeight))),
 	)
 }
 
@@ -109,16 +113,14 @@ func exportAppStateAndTMValidators(
 	logger log.Logger, db dbm.DB, traceStore io.Writer, height int64, forZeroHeight bool, jailWhiteList []string,
 ) (json.RawMessage, []tmtypes.GenesisValidator, error) {
 
+	aragonChain := app.NewApp(logger, db, traceStore, true, map[int64]bool{}, 0)
+
 	if height != -1 {
-		aragonChain := app.NewApp(logger, db, traceStore, true, 0)
 		err := aragonChain.LoadHeight(height)
 		if err != nil {
 			return nil, nil, err
 		}
-		return aragonChain.ExportAppStateAndValidators(forZeroHeight, jailWhiteList)
 	}
-
-	aragonChain := app.NewApp(logger, db, traceStore, true, 0)
 
 	return aragonChain.ExportAppStateAndValidators(forZeroHeight, jailWhiteList)
 }

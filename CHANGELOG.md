@@ -37,6 +37,17 @@ Ref: https://keepachangelog.com/en/1.0.0/
 
 ## [Unreleased]
 
+### Features
+
+* [\#3](https://github.com/aragon/aragon-chain/pull/3) Testnet features:
+  * (client) `aragonchaind testnet` command support to create a multi-node testnet with Docker compose.
+  * (scripts) `init.sh` script for running a single local node.
+
 ### Improvements
 
-* (ethermint) [\#2](https://github.com/aragon/aragon-chain/pull/2) Bump Ethermint version to [v0.1.0](https://github.com/ChainSafe/ethermint/releases/tag/v0.1.0)
+* [\#3](https://github.com/aragon/aragon-chain/pull/3) Various improvements:
+  * (ethermint) Bump Ethermint version to [v0.2.0](https://github.com/ChainSafe/ethermint/releases/tag/v0.2.0)
+  * (types) Define constants for `ARA` token.
+  * (types) Update [BIP44](https://github.com/bitcoin/bips/blob/master/bip-0044.mediawiki) coin type to `60` to satisfy [EIP84](https://github.com/ethereum/EIPs/issues/84).
+* [\#17](https://github.com/aragon/aragon-chain/pull/17) Update testnet cmd:
+  * (client) `aragonchaind testnet` command takes multiple ip addresses and adds them to the genesis + configurations.
