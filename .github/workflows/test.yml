@@ -22,9 +22,9 @@ jobs:
             .sol
       - uses: codecov/codecov-action@v1
         with:
-          file: ./codecov.yml
+          file: ./codecov.txt
           fail_ci_if_error: true
         if: "env.GIT_DIFF != ''"
       - name: test & coverage report creation
         run: |
-          make test
+          go test ./... -mod=readonly -timeout 10m -coverprofile=coverage.txt -covermode=atomic
