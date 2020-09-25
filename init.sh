@@ -1,7 +1,7 @@
 #!/bin/bash
 
 KEY="mykey"
-CHAINID=1123698127639817236
+CHAINID="aragonchain-1123698127639817236"
 MONIKER="localtestnet"
 
 # remove existing daemon and client

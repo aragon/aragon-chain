@@ -22,16 +22,16 @@ import (
 	bankcmd "github.com/cosmos/cosmos-sdk/x/bank/client/cli"
 
 	ethermintclient "github.com/cosmos/ethermint/client"
+	ethermintcodec "github.com/cosmos/ethermint/codec"
 	ethermintcrypto "github.com/cosmos/ethermint/crypto"
 	"github.com/cosmos/ethermint/rpc"
 
 	"github.com/aragon/aragon-chain/app"
-	"github.com/aragon/aragon-chain/codec"
 	aragon "github.com/aragon/aragon-chain/types"
 )
 
 var (
-	cdc = codec.MakeCodec(app.ModuleBasics)
+	cdc = ethermintcodec.MakeCodec(app.ModuleBasics)
 )
 
 func main() {
@@ -67,7 +67,9 @@ func main() {
 		client.ConfigCmd(app.DefaultCLIHome),
 		queryCmd(cdc),
 		txCmd(cdc),
-		rpc.EmintServeCmd(cdc),
+		ethermintclient.ValidateChainID(
+			rpc.EmintServeCmd(cdc),
+		),
 		flags.LineBreak,
 		ethermintclient.KeyCommands(),
 		flags.LineBreak,

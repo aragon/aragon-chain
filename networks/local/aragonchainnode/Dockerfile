@@ -11,7 +11,7 @@ WORKDIR /go/src/github.com/aragon/aragon-chain
 # Add source files
 COPY . .
 
-# build Ethermint
+# build Aragon Chain
 RUN make build-aragon-chain-linux
 
 # Final image

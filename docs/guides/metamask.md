@@ -21,7 +21,7 @@ You can also start a node from scratch by running `./init.sh` from the Aragon Ch
 In another tab start the REST server. Here replace `mykey` with the name of the key that you want to use and set the `chain-id` the chain identifier of your application.
 
 ```bash
-aragonchaincli rest-server --laddr "tcp://localhost:8545" --unlock-key mykey --chain-id 1
+aragonchaincli rest-server --laddr "tcp://localhost:8545" --unlock-key mykey --chain-id "aragonchain-1"
 ```
 
 ## Adding a custom Network for Aragon Chain

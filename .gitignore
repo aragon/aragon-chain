@@ -34,6 +34,7 @@ coverage.txt
 *.out
 sim_log_file
 importer/tmp
+testnet/
 
 # Vagrant
 .vagrant/

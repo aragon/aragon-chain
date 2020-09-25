@@ -36,16 +36,7 @@ import (
 	"github.com/tendermint/tendermint/libs/log"
 	tmos "github.com/tendermint/tendermint/libs/os"
 	dbm "github.com/tendermint/tm-db"
-
-	aragon "github.com/aragon/aragon-chain/types"
 )
-
-func init() {
-	// set the address prefixes
-	config := sdk.GetConfig()
-	aragon.SetBech32Prefixes(config)
-	aragon.SetBip44CoinType(config)
-}
 
 const appName = "AragonChain"
 
@@ -214,11 +205,11 @@ func NewApp(
 	app.CrisisKeeper = crisis.NewKeeper(
 		app.subspaces[crisis.ModuleName], invCheckPeriod, app.SupplyKeeper, auth.FeeCollectorName,
 	)
-	app.EvmKeeper = evm.NewKeeper(
-		app.cdc, keys[evm.StoreKey], app.subspaces[evm.ModuleName], app.AccountKeeper,
-	)
 	app.UpgradeKeeper = upgrade.NewKeeper(
 		skipUpgradeHeights, keys[upgrade.StoreKey], app.cdc,
+	)
+	app.EvmKeeper = evm.NewKeeper(
+		app.cdc, keys[evm.StoreKey], app.subspaces[evm.ModuleName], app.AccountKeeper,
 	)
 	app.FaucetKeeper = faucet.NewKeeper(
 		app.cdc, keys[faucet.StoreKey], app.SupplyKeeper,
