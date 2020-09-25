@@ -22,7 +22,7 @@ jobs:
             .sol
       - uses: codecov/codecov-action@v1
         with:
-          file: ./coverage.txt
+          file: ./codecov.txt
           fail_ci_if_error: true
         if: "env.GIT_DIFF != ''"
       - name: test & coverage report creation
