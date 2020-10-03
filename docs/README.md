@@ -1,7 +1,7 @@
 <!--
 layout: home
 title: Aragon Chain Documentation
-description: Aragon Chain is a scalable and interoperable Ethereum, built on Proof-of-Stake with fast-finality.
+description: Aragon Chain is a scalable, high-throughput Proof-of-Stake blockchain that is fully compatible and interoperable with Ethereum.
 sections:
   - title: Introduction
     desc: Read a high-level overview of Aragon Chain and its architecture.
